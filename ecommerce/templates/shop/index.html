@@ -3,40 +3,25 @@
 {% block content %}
         <!-- Start Slider area -->
         <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
-        	<!-- Start Single Slide -->
-	        <div class="slide animation__style10 bg-image--1 fullscreen align__center--left" style="background-image: url('{% static 'images/bg/1.jpg' %}')">
-	            <div class="container">
-	            	<div class="row">
-	            		<div class="col-lg-12">
-	            			<div class="slider__content">
-		            			<div class="contentbox">
-		            				<h2>Еженедельные скидки и акции</h2>
-												<h3>Подписчики узнают об акциях первыми!</h3>
-												<a href="#Subscribe" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Подписаться</a>
-		            			</div>
-	            			</div>
-	            		</div>
-	            	</div>
-	            </div>
-            </div>
-            <!-- End Single Slide -->
-        	<!-- Start Single Slide -->
-	        <div class="slide animation__style10 bg-image--7 fullscreen align__center--left" style="background-image: url('{% static 'images/bg/1.jpg' %}')">
-	            <div class="container">
-	            	<div class="row">
-	            		<div class="col-lg-12">
-	            			<div class="slider__content">
-		            			<div class="contentbox">
-		            				<h2>Упаковка каждого заказа</h2>
-		            				<h3>с особой любовью</h3>
-												<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">В магазин</a>
-		            			</div>
-	            			</div>
-	            		</div>
-	            	</div>
-	            </div>
-            </div>
-            <!-- End Single Slide -->
+					{% for slider in sliders %}
+					<!-- Start Single Slide -->
+						<div class="slide animation__style10 bg-image--1 fullscreen align__center--left" style="background-image: url('{{slider.image.url}}')">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="slider__content">
+											<div class="contentbox">
+												<h2>{{slider.title}}</h2>
+												<h3>{{slider.body}}</h3>
+												<a href="{{slider.link}}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">{{slider.button_name}}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- End Single Slide -->
+					{% endfor %}
         </div>
         <!-- End Slider area -->
 		<!-- Start New Product -->
