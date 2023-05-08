@@ -2608,7 +2608,8 @@ nav.menu {
     line-height: 20px;
     margin-bottom: 10px;
     padding: 0;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    white-space: break-spaces; }
     .product.product__style--3 .product__content h4 a:hover {
       color: #ce7852; }
   .product.product__style--3 .product__content .prize {

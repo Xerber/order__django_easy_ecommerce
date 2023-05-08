@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -63,13 +64,12 @@ class Product(models.Model):
     url = models.SlugField(max_length=160)
     category = models.ForeignKey(Sub_Category, verbose_name='Категория', on_delete=models.SET_NULL, null=True)
     total_quantity = models.PositiveSmallIntegerField('Общее количество')
-    description = models.TextField('Описание')
+    description = RichTextField('Описание')
     image = models.ImageField('Изображение', upload_to='product', default='base/Product.jpg')
     price = models.IntegerField('Цена')
     past_price = models.IntegerField('Цена до скидки', blank=True, null=True)
     tag = models.CharField('Тэг', max_length=25, blank=True, null=True)
     new_product = models.BooleanField('Новинка', default=False)
-    best_seller = models.BooleanField('Топ продаж', default=False)
     product_status = models.CharField('Статус', choices=STATUS, max_length=10, default='draft')
 
     class Meta:

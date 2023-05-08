@@ -37,7 +37,7 @@ class ProductShotsInline(admin.TabularInline):
 class SpecificationsInline(admin.TabularInline):
     '''Характеристики товара'''
     model = Specifications
-    extra = 1
+    extra = 3
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
