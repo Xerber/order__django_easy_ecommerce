@@ -6,10 +6,12 @@ from .models import Slider, Category, Product
 def index(request):
   slider = Slider.objects.filter(draft=False).order_by('queue')
   categories = Category.objects.all()
+  all_products = Product.objects.all()
   new_products = Product.objects.filter(product_status='published',new_product=True)
   context ={
     'sliders': slider,
     'categories': categories,
     'new_products': new_products,
+    'all_products': all_products,
   }
   return render(request,'shop/index.html',context)

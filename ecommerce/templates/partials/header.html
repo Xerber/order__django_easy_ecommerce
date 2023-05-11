@@ -20,7 +20,7 @@
                   <ul class="item item03">
                     <li class="title">{{category.name|safe}}</li>
                     {% for sub_cat in category.sub_category_set.all %}
-                      <li><a href="shop-grid.html">{{sub_cat.name|safe}}</a></li>
+                      <li><a href="shop-grid.html">{{sub_cat.name}}</a></li>
                     {% endfor %}
                   </ul>
                 {% endfor %}
