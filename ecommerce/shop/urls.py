@@ -23,8 +23,10 @@ from django.conf import settings
 
 app_name = 'shop'
 
+
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('shop/product/<slug:slug>', views.product_details, name='product_detail'),
 ]
 
 

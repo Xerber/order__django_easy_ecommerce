@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Slider, Category, Product
 
 
@@ -15,3 +15,21 @@ def index(request):
     'all_products': all_products,
   }
   return render(request,'shop/index.html',context)
+
+
+def product_details(request,slug):
+    product = Product.objects.filter(slug=slug)
+    if len(product) is 0:
+        return redirect('error404')
+    else:
+        product = Product.objects.get(slug=slug)
+    categories = Category.objects.all()
+    context = {
+      'categories': categories,
+      'product': product,
+    }
+    return render(request, 'shop/product_detail.html',context)
+
+
+def page_not_found(request):
+    return render(request, 'error/error404.html')

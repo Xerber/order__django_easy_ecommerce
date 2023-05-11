@@ -61,10 +61,11 @@ STATUS = (
 class Product(models.Model):
     '''Товар'''
     title = models.CharField('Заголовок', max_length=200)
-    url = models.SlugField(max_length=160)
+    slug = models.SlugField(max_length=160)
     category = models.ForeignKey(Sub_Category, verbose_name='Категория', on_delete=models.SET_NULL, null=True)
     total_quantity = models.PositiveSmallIntegerField('Общее количество')
     description = RichTextField('Описание')
+    specifications = RichTextField('Характеристики')
     image = models.ImageField('Изображение', upload_to='product', default='base/Product.jpg')
     price = models.IntegerField('Цена')
     past_price = models.IntegerField('Цена до скидки', blank=True, null=True)
@@ -77,7 +78,7 @@ class Product(models.Model):
       verbose_name_plural = 'Товары'
 
     def get_absolute_url(self):
-        return reverse("product_detail", kwargs={"slug": self.url})
+        return reverse("shop:product_detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
@@ -90,17 +91,3 @@ class ProductShots(models.Model):
     class Meta:
       verbose_name = 'Доп. картинка товара'
       verbose_name_plural = 'Доп. картинки товара'
-
-
-class Specifications(models.Model):
-    '''Характеристики товара'''
-    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
-    title = models.CharField('Название', max_length=100)
-    detail = models.CharField('Значение', max_length=100)
-
-    class Meta:
-      verbose_name = 'Характеристика товара'
-      verbose_name_plural = 'Характеристики товаров'
-
-    def __str__(self):
-      return self.title

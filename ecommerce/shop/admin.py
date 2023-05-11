@@ -34,10 +34,6 @@ class ProductShotsInline(admin.TabularInline):
     
     get_image.short_description="Изображение"
 
-class SpecificationsInline(admin.TabularInline):
-    '''Характеристики товара'''
-    model = Specifications
-    extra = 3
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -52,7 +48,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ("category__name",)
     search_fields = ("title","category__name")
     readonly_fields = ("get_image",)
-    inlines = [ProductShotsInline,SpecificationsInline]
+    inlines = [ProductShotsInline,]
     save_on_top = True
 
     def get_image(self,obj):
