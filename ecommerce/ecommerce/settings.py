@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'account',
     'ckeditor_uploader',
     'ckeditor',
 ]
@@ -135,6 +136,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LANGUAGE_CODE = 'ru'
+PASSWORD_RESET_TIMEOUT = 14400
+
+# Emailing settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'cherobuk.91@gmail.com'
+EMAIL_HOST_USER = 'cherobuk.91@gmail.com'
+EMAIL_HOST_PASSWORD = 'ovvabtardxihnrzh'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 CKEDITOR_UPLOAD_PATH = "media/uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"

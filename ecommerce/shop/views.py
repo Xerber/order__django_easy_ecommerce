@@ -33,3 +33,7 @@ def product_details(request,slug):
 
 def page_not_found(request):
     return render(request, 'error/error404.html')
+
+
+def contact_view(request):
+    return render(request, 'shop/contact.html')

@@ -14,18 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from shop import views
+from . import views
+from django.urls import path
 
+
+app_name = 'account'
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('shop.urls')),
-    path('account/', include('account.urls')),
-    path('contact/', views.contact_view, name='contact'),
-    path('error404', views.page_not_found, name='error404'),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('my_account', views.my_account, name='my_account'),
+    path('register', views.register_view, name='register'),
+    path('login', views.auth_view, name='login'),
+    path('logout', views.logout_view, name='logout'),
+    path("password_reset", views.password_reset_request, name="password_reset"),
+    path('reset/<uidb64>/<token>', views.passwordResetConfirm, name='password_reset_confirm'),
 ]
-
