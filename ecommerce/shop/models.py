@@ -43,6 +43,9 @@ class Sub_Category(models.Model):
     name = models.CharField('Название', max_length=100)
     url = models.SlugField(max_length=160)
 
+    def get_absolute_url(self):
+        return reverse('shop:category_grid', kwargs={'url': self.url})
+
     class Meta:
         verbose_name = 'Подкатегория'
         verbose_name_plural = 'Подкатегории'

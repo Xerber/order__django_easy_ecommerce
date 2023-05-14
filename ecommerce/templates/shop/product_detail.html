@@ -56,9 +56,8 @@
 								</div>
 									</div>
 							<div class="product_meta">
-								<span class="posted_in">Категории: 
-									<a href="#">{{product.category.name}}</a>, 
-									<a href="#">{{product.category.category.name}}</a>
+								<span class="posted_in">Категория: 
+									<a href="{{product.category.get_absolute_url}}">{{product.category.name}}</a>
 								</span>
 							</div>
 							<div class="product-share">

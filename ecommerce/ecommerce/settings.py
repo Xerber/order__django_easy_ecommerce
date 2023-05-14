@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -198,4 +199,10 @@ CKEDITOR_CONFIGS = {
             ['Maximize', 'ShowBlocks', '-', 'About', 'pbckcode'],
         ),
     }
+}
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Административная панель Санты",
+    "site_brand": "Сайт Санты",
+    "welcome_sign": "Добро пожаловать к Санте",
 }

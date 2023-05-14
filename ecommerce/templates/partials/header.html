@@ -14,13 +14,13 @@
         <nav class="mainmenu__nav">
           <ul class="meninmenu d-flex justify-content-start">
             <li class="drop with--one--item"><a href="{% url 'shop:index' %}">Главная</a></li>
-            <li class="drop"><a href="#">Магазин</a>
+            <li class="drop"><a href="{% url 'shop:product_grid' %}">Магазин</a>
               <div class="megamenu mega03">
                 {% for category in categories %}
                   <ul class="item item03">
                     <li class="title">{{category.name|safe}}</li>
                     {% for sub_cat in category.sub_category_set.all %}
-                      <li><a href="shop-grid.html">{{sub_cat.name}}</a></li>
+                      <li><a href="{{sub_cat.get_absolute_url}}">{{sub_cat.name}}</a></li>
                     {% endfor %}
                   </ul>
                 {% endfor %}
@@ -46,6 +46,7 @@
                 </ul>
               </div>
             </li>
+            <li><a href="#">Услуги</a></li>
             <li><a href="{% url 'contact' %}">Контакты</a></li>
           </ul>
         </nav>

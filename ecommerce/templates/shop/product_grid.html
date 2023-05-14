@@ -1,0 +1,205 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bg-image--6" style="background-image: url('{% static 'images/bg/4.jpg' %}')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="bradcaump__inner text-center">
+                        	<h2 class="bradcaump-title">Список товаров</h2>
+                            <nav class="bradcaump-content">
+                              <a class="breadcrumb_item" href="{% url 'shop:index' %}">Домашняя</a>
+                              <span class="brd-separetor">/</span>
+                              <span class="breadcrumb_item active">Список товаров</span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- Start Shop Page -->
+        <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+        				<div class="shop__sidebar">
+									{% for category in categories %}
+										<aside class="wedget__categories poroduct--cat">
+											<h3 class="wedget__title">{{category.name|safe}}</h3>
+											<ul>
+												{% for sub_cat in category.sub_category_set.all %}
+													<li><a href="{{sub_cat.get_absolute_url}}">{{sub_cat.name}} <span>({{sub_cat.product_set.all.count}})</span></a></li>
+												{% endfor %}
+											</ul>
+										</aside>
+									{% endfor %}
+        				</div>
+        			</div>
+        			<div class="col-lg-9 col-12 order-1 order-lg-2">
+        				<div class="row">
+        					<div class="col-lg-12">
+								<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+									<div class="shop__list nav justify-content-center" role="tablist">
+			                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+			                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+			                        </div>
+			                        <p>Показано 1–{{all_products.count}} из {{all_products.count}} результатов</p>
+		                        </div>
+        					</div>
+        				</div>
+        				<div class="tab__container">
+	        				<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+	        					<div class="row">
+											{% if all_products|length == 0 %}
+											<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+												<div class="product__thumb">
+													<img src="{% static 'images/others/error404.png' %}" alt="product not found">
+													<div class="product__content content--center">
+														<h4>Не найдено товаров в данной категории</h4>
+													</div>
+												</div>
+											</div>
+											{% else %}
+												{% for product in all_products %}
+													<!-- Start Single Product -->
+													<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+														<div class="product__thumb">
+															<a class="first__img" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product image"></a>
+															<a class="second__img animation1" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product image"></a>
+															{% if product.tag is not None %}
+																<div class="hot__box">
+																	<span class="hot-label">{{product.tag}}</span>
+																</div>
+															{% endif %}
+														</div>
+														<div class="product__content content--center">
+															<h4><a href="{{product.get_absolute_url}}">{{product.title}}</a></h4>
+															<ul class="prize d-flex">
+																<li>{{product.price}} руб.</li>
+																{% if product.past_price is not None %}
+																	<li class="old_prize">{{product.past_price}} руб.</li>
+																{% endif %}
+															</ul>
+															<div class="action">
+																<div class="actions_inner">
+																	<ul class="add_to_links">
+																		<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+																		<li><a class="wishlist" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+																		<li><a class="compare" title="Избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																		<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- End Single Product -->
+												{% endfor %}
+											{% endif %}
+	        					</div>
+	        					<ul class="wn__pagination">
+	        						<li class="active"><a href="#">1</a></li>
+	        						<li><a href="#">2</a></li>
+	        						<li><a href="#">3</a></li>
+	        						<li><a href="#">4</a></li>
+	        						<li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+	        					</ul>
+	        				</div>
+	        				<div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+	        					<div class="list__view__wrapper">
+											{% if all_products|length == 0 %}
+											<div class="list__view">
+												<div class="thumb">
+													<img src="{% static 'images/others/error404.png' %}" alt="product not found">
+													<div class="content">
+														<p>Не найдено товаров в данной категории</p>
+													</div>
+												</div>
+											</div>
+											{% else %}
+												{% for product in all_products %}
+													<!-- Start Single Product -->
+													<div class="list__view">
+														<div class="thumb">
+															<a class="first__img" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product images"></a>
+															<a class="second__img animation1" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product images"></a>
+														</div>
+														<div class="content">
+															<h2><a href="{{product.get_absolute_url}}">{{product.title}}</a></h2>
+															<ul class="prize__box">
+																<li>{{product.price}} руб.</li>
+																{% if product.past_price is not None %}
+																	<li class="old__prize">{{product.past_price}} руб.</li>
+																{% endif %}
+															</ul>
+															<p>{{product.description|safe}}</p>
+															<ul class="cart__action d-flex">
+																<li class="cart"><a href="cart.html">В корзину</a></li>
+																<li class="wishlist"><a href="cart.html" style="background: white url('{% static 'images/icons/wishlist.png' %}') no-repeat scroll -6% 0"></a></li>
+															</ul>
+														</div>
+													</div>
+													<!-- End Single Product -->
+												{% endfor %}
+											{% endif %}
+	        					</div>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        <!-- End Shop Page -->
+				{% for product in all_products %}
+				<!-- QUICKVIEW PRODUCT -->
+				<div id="quickview-wrapper">
+					<!-- Modal -->
+					<div class="modal fade" id="productmodal-{{product.slug}}" tabindex="-1" role="dialog">
+							<div class="modal-dialog modal__container" role="document">
+									<div class="modal-content">
+											<div class="modal-header modal__header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											</div>
+											<div class="modal-body">
+													<div class="modal-product">
+															<!-- Start product images -->
+															<div class="product-images">
+																	<div class="main-image images">
+																			<img alt="big images" src="{{product.image.url}}">
+																	</div>
+															</div>
+															<!-- end product images -->
+															<div class="product-info">
+																	<h1>{{product.title}}</h1>
+																	<div class="price-box-3">
+																			<div class="s-price-box">
+																					<h3>Цена: <span class="new-price">{{product.price}} руб.</span>
+																					{% if product.past_price is not None %}
+																					<span class="old-price">{{product.past_price}}</span>
+																					{% endif %}</h3>
+																					<p><h3>В наличии: {{product.total_quantity}} шт.</h3></p>
+																			</div>
+																	</div>
+																	<div class="quick-desc">
+																		<p><b>Описание:</b>{{product.description|safe}}</p>
+																	</div>
+																	<div class="addtocart-btn">
+																			{% if product.total_quantity is 0 %}
+																				<a class="nav-link disabled" href="#productmodal-{{product.slug}}" tabindex="-1" aria-disabled="true">Нет в наличии</a>
+																			{% else %}
+																				<a href="#">В корзину</a>
+																			{% endif %}
+																				<a href="{{product.get_absolute_url}}">Подробней</a>
+																			
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+			<!-- END QUICKVIEW PRODUCT -->
+			{% endfor %}
+{% endblock content %}

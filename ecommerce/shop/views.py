@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Slider, Category, Product
+from .models import Slider, Category, Product, Sub_Category
 
 
 # Create your views here.
@@ -7,11 +7,9 @@ def index(request):
   slider = Slider.objects.filter(draft=False).order_by('queue')
   categories = Category.objects.all()
   all_products = Product.objects.all()
-  new_products = Product.objects.filter(product_status='published',new_product=True)
   context ={
     'sliders': slider,
     'categories': categories,
-    'new_products': new_products,
     'all_products': all_products,
   }
   return render(request,'shop/index.html',context)
@@ -19,7 +17,7 @@ def index(request):
 
 def product_details(request,slug):
     product = Product.objects.filter(slug=slug)
-    if len(product) is 0:
+    if len(product) == 0:
         return redirect('error404')
     else:
         product = Product.objects.get(slug=slug)
@@ -34,6 +32,26 @@ def product_details(request,slug):
 def page_not_found(request):
     return render(request, 'error/error404.html')
 
+
+def product_grid(request):
+    categories = Category.objects.all()
+    all_products = Product.objects.all()
+    context = {
+      'categories': categories,
+      'all_products': all_products,
+    }
+    return render(request, 'shop/product_grid.html',context)
+
+
+def category_grid(request,url):
+    categories = Category.objects.all()
+    sub_cat = Sub_Category.objects.get(url=url)
+    all_products = Product.objects.filter(category=sub_cat)
+    context = {
+      'categories': categories,
+      'all_products': all_products,
+    }
+    return render(request, 'shop/product_grid.html',context)
 
 def contact_view(request):
     return render(request, 'shop/contact.html')
