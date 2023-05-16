@@ -56,82 +56,7 @@
           <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopcart" {% endif %} style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/search.png' %}') no-repeat scroll 0 center "><a class="search__active" href="#"></a></li>
           {% if user.is_authenticated %}
             <li class="wishlist" style="background: url('{% static 'images/icons/button-wishlist.png' %}') no-repeat scroll center"><a href="#"></a></li>
-            <li class="shopcart" style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/cart.png' %}') no-repeat scroll 0 center"><a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
-              <!-- Start Shopping Cart -->
-              <div class="block-minicart minicart__active">
-                <div class="minicart-content-wrapper">
-                  <div class="micart__close">
-                    <span>close</span>
-                  </div>
-                  <div class="items-total d-flex justify-content-between">
-                    <span>3 items</span>
-                    <span>Cart Subtotal</span>
-                  </div>
-                  <div class="total_amount text-right">
-                    <span>$66.00</span>
-                  </div>
-                  <div class="mini_action checkout">
-                    <a class="checkout__btn" href="cart.html">Go to Checkout</a>
-                  </div>
-                  <div class="single__items">
-                    <div class="miniproduct">
-                      <div class="item01 d-flex">
-                        <div class="thumb">
-                          <a href="product-details.html"><img src="{% static 'images/product/sm-img/1.jpg' %}" alt="product images"></a>
-                        </div>
-                        <div class="content">
-                          <h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
-                          <span class="prize">$30.00</span>
-                          <div class="product_prize d-flex justify-content-between">
-                            <span class="qun">Qty: 01</span>
-                            <ul class="d-flex justify-content-end">
-                              <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                              <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item01 d-flex mt--20">
-                        <div class="thumb">
-                          <a href="product-details.html"><img src="{% static 'images/product/sm-img/3.jpg' %}" alt="product images"></a>
-                        </div>
-                        <div class="content">
-                          <h6><a href="product-details.html">Impulse Duffle</a></h6>
-                          <span class="prize">$40.00</span>
-                          <div class="product_prize d-flex justify-content-between">
-                            <span class="qun">Qty: 03</span>
-                            <ul class="d-flex justify-content-end">
-                              <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                              <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item01 d-flex mt--20">
-                        <div class="thumb">
-                          <a href="product-details.html"><img src="{% static 'images/product/sm-img/2.jpg' %}" alt="product images"></a>
-                        </div>
-                        <div class="content">
-                          <h6><a href="product-details.html">Compete Track Tote</a></h6>
-                          <span class="prize">$40.00</span>
-                          <div class="product_prize d-flex justify-content-between">
-                            <span class="qun">Qty: 03</span>
-                            <ul class="d-flex justify-content-end">
-                              <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                              <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mini_action cart">
-                    <a class="cart__btn" href="cart.html">View and edit cart</a>
-                  </div>
-                </div>
-              </div>
-              <!-- End Shopping Cart -->
-            </li>
+            <li class="shopcart" style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/cart.png' %}') no-repeat scroll 0 center"><a href="{% url 'cart:cart' %}"><span class="product_qun cart-items-count">{{request.session.cart_data_obj|length}}</span></a></li>
           {% endif %}
           <li class="setting__bar__icon" style="background: transparent url('{% static 'images/icons/icon_setting.png' %}') no-repeat scroll left center"><a class="setting__active" href="#"></a>
             <div class="searchbar__content setting__block">
@@ -214,11 +139,11 @@
 <!-- //Header -->
 <!-- Start Search Popup -->
 <div class="brown--color box-search-content search_active block-bg close__top">
-  <form id="search_mini_form" class="minisearch" action="#">
+  <form id="search_mini_form" class="minisearch" action="{% url 'shop:search' %}" method='GET'>
     <div class="field__search">
-      <input type="text" placeholder="Search entire store here...">
+      <input type="text" placeholder="Search entire store here..." name='q'>
       <div class="action">
-        <a href="#"><i class="zmdi zmdi-search"></i></a>
+        <a href="#" onclick="document.forms['search_mini_form'].submit();"><i class="zmdi zmdi-search"></i></a>
       </div>
     </div>
   </form>

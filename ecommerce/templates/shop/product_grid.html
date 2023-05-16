@@ -66,7 +66,7 @@
 													<!-- Start Single Product -->
 													<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 														<div class="product__thumb">
-															<a class="first__img" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product image"></a>
+															<a class="first__img" id="product-get_absolute_url-{{product.id}}" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product image"></a>
 															<a class="second__img animation1" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" alt="product image"></a>
 															{% if product.tag is not None %}
 																<div class="hot__box">
@@ -77,18 +77,23 @@
 														<div class="product__content content--center">
 															<h4><a href="{{product.get_absolute_url}}">{{product.title}}</a></h4>
 															<ul class="prize d-flex">
-																<li>{{product.price}} руб.</li>
+																<li id="product-price-{{product.id}}">{{product.price}} руб.</li><!--!!!-->
 																{% if product.past_price is not None %}
 																	<li class="old_prize">{{product.past_price}} руб.</li>
 																{% endif %}
 															</ul>
+															<input type="hidden" value="1" name="product-qty" id="product-qty-{{product.id}}" class="product-qty"><!--!!!-->
+															<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
+															<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 															<div class="action">
 																<div class="actions_inner">
 																	<ul class="add_to_links">
-																		<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-																		<li><a class="wishlist" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+																		<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
+																		<li><a class="wishlist add-to-cart-btn" title="В корзину" data-index="{{product.id}}" href="#"><i class="bi bi-shopping-cart-full"></i></a></li>
 																		<li><a class="compare" title="Избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
-																		<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
+																		<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 																	</ul>
 																</div>
 															</div>
@@ -128,14 +133,19 @@
 														<div class="content">
 															<h2><a href="{{product.get_absolute_url}}">{{product.title}}</a></h2>
 															<ul class="prize__box">
-																<li>{{product.price}} руб.</li>
+																<li class="product-price-{{product.id}}">{{product.price}} руб.</li><!--!!!-->
 																{% if product.past_price is not None %}
 																	<li class="old__prize">{{product.past_price}} руб.</li>
 																{% endif %}
 															</ul>
+															<input type="hidden" value="1" name="product-qty" id="product-qty-{{product.id}}" class="product-qty"><!--!!!-->
+															<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
+															<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 															<p>{{product.description|safe}}</p>
 															<ul class="cart__action d-flex">
-																<li class="cart"><a href="cart.html">В корзину</a></li>
+																<li class="cart"><a class="add-to-cart-btn" data-index="{{product.id}}" href="#">В корзину</a></li>
 																<li class="wishlist"><a href="cart.html" style="background: white url('{% static 'images/icons/wishlist.png' %}') no-repeat scroll -6% 0"></a></li>
 															</ul>
 														</div>
@@ -174,7 +184,7 @@
 																	<h1>{{product.title}}</h1>
 																	<div class="price-box-3">
 																			<div class="s-price-box">
-																					<h3>Цена: <span class="new-price">{{product.price}} руб.</span>
+																					<<h3>Цена: <span class="new-price" id="product-price-{{product.id}}">{{product.price}} руб.</span><!--!!!-->
 																					{% if product.past_price is not None %}
 																					<span class="old-price">{{product.past_price}}</span>
 																					{% endif %}</h3>
@@ -184,11 +194,16 @@
 																	<div class="quick-desc">
 																		<p><b>Описание:</b>{{product.description|safe}}</p>
 																	</div>
+																	<input type="hidden" value="1" name="product-qty" id="product-qty-{{product.id}}" class="product-qty"><!--!!!-->
+																	<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
+																	<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
+																	<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
+																	<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 																	<div class="addtocart-btn">
 																			{% if product.total_quantity is 0 %}
 																				<a class="nav-link disabled" href="#productmodal-{{product.slug}}" tabindex="-1" aria-disabled="true">Нет в наличии</a>
 																			{% else %}
-																				<a href="#">В корзину</a>
+																				<a href="#" class="add-to-cart-btn" id="add-to-cart-btn" data-index="{{product.id}}">В корзину</a>
 																			{% endif %}
 																				<a href="{{product.get_absolute_url}}">Подробней</a>
 																			

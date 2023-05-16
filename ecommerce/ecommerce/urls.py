@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
     path('account/', include('account.urls')),
+    path('cart/', include('cart.urls')),
     path('contact/', views.contact_view, name='contact'),
     path('error404', views.page_not_found, name='error404'),
     path('ckeditor/', include('ckeditor_uploader.urls')),

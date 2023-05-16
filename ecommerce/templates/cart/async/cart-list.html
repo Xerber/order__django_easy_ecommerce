@@ -1,0 +1,56 @@
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white" id="cart-list">
+		<div class="container">
+				<div class="row">
+						<div class="col-md-12 col-sm-12 ol-lg-12">
+								<form action="#">               
+										<div class="table-content wnro__table table-responsive">
+												<table>
+														<thead>
+																<tr class="title-top">
+																		<th class="product-thumbnail">Изображение</th>
+																		<th class="product-name">Название</th>
+																		<th class="product-price">Цена</th>
+																		<th class="product-quantity">Количество</th>
+																		<th class="product-subtotal">Общая стоимость</th>
+																		<th class="product-remove">Удалить</th>
+																</tr>
+														</thead>
+														<tbody>
+															  {% for product_id, item in cart_data.items %}
+																	<tr>
+																		<td class="product-thumbnail"><a href="#"><img src="{{item.image}}" alt="product img"></a></td>
+																		<td class="product-name"><a href="{{item.get_absolute_url}}">{{item.title}}</a></td>
+																		<td class="product-price"><span class="amount">{{item.price|floatformat:2}}</span></td>
+																		<td class="product-quantity"><input type="number" value="{{item.qty}}" min="1" id="{{item.id}}"></td>
+																		<td class="product-subtotal">{% widthratio item.price 1 item.qty %}</td>
+																		<td class="product-remove"><a class="product-remove_cl" id="{{item.id}}" href="">X</a></td>
+																	</tr>
+																{% endfor %}
+														</tbody>
+												</table>
+										</div>
+								</form> 
+                {% if totalcartitems %}
+								<div class="cartbox__btn">
+										<ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+												<li><a href="#">Update Cart</a></li>
+												<li><a href="#">Check Out</a></li>
+										</ul>
+								</div>
+                {% endif %}
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-lg-6 offset-lg-6">
+								<div class="cartbox__total__area">
+										<div class="cart__total__amount">
+												<span>Общая стоимость</span>
+												<span>{{cart_total_amount|floatformat:2}}</span>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>  
+</div>
+<!-- cart-main-area end -->

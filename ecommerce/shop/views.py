@@ -54,4 +54,20 @@ def category_grid(request,url):
     return render(request, 'shop/product_grid.html',context)
 
 def contact_view(request):
-    return render(request, 'shop/contact.html')
+    categories = Category.objects.all()
+    context = {
+      'categories': categories,
+    }
+    return render(request, 'shop/contact.html', context)
+
+
+def search_view(request):
+    categories = Category.objects.all()
+    query = request.GET.get('q')
+    all_products = Product.objects.filter(title__icontains=query).order_by("-price") 
+    context = {
+      'categories': categories,
+      'query': query,
+      'all_products': all_products
+    }
+    return render(request, 'shop/product_grid.html',context)
