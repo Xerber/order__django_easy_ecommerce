@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor.fields import RichTextField
@@ -94,3 +95,18 @@ class ProductShots(models.Model):
     class Meta:
       verbose_name = 'Доп. картинка товара'
       verbose_name_plural = 'Доп. картинки товара'
+
+
+class Wishlist(models.Model):
+    '''Избранное'''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'
+
+    def __str__(self):
+        return self.product.title
+    

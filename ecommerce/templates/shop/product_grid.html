@@ -91,8 +91,8 @@
 																<div class="actions_inner">
 																	<ul class="add_to_links">
 																		<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
-																		<li><a class="wishlist add-to-cart-btn" title="В корзину" data-index="{{product.id}}" href="#"><i class="bi bi-shopping-cart-full"></i></a></li>
-																		<li><a class="compare" title="Избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																		<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" href="#"><i class="bi bi-shopping-cart-full"></i></a></li>
+																		<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
 																		<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 																	</ul>
 																</div>
@@ -145,8 +145,8 @@
 															<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 															<p>{{product.description|safe}}</p>
 															<ul class="cart__action d-flex">
-																<li class="cart"><a class="add-to-cart-btn" data-index="{{product.id}}" href="#">В корзину</a></li>
-																<li class="wishlist"><a href="cart.html" style="background: white url('{% static 'images/icons/wishlist.png' %}') no-repeat scroll -6% 0"></a></li>
+																<li class="cart"><a class="add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" data-index="{{product.id}}" href="#">В корзину</a></li>
+																<li class="wishlist"><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#" style="background: white url('{% static 'images/icons/wishlist.png' %}') no-repeat scroll -6% 0"></a></li>
 															</ul>
 														</div>
 													</div>

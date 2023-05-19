@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from shop.models import Category
+from shop.models import Category, Wishlist
 
 
 
@@ -31,6 +31,8 @@ def add_to_cart(request):
             
     else:
         request.session['cart_data_obj'] = cart_product
+    
+        
     return JsonResponse({"data": request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
 
 

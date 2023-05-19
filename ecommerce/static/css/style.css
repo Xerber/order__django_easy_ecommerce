@@ -376,7 +376,7 @@ caption,
 th,
 td {
   font-weight: normal;
-  text-align: left; }
+  text-align: center; }
 
 caption {
   font-size: 16px;
@@ -5401,7 +5401,7 @@ h3.widget-title-modal {
 .wnro__table th .nobr {
   color: #2e2e2e;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   padding: 20px 0;
   text-transform: uppercase; }

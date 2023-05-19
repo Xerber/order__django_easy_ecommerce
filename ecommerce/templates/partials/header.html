@@ -26,26 +26,6 @@
                 {% endfor %}
               </div>
             </li>
-            <li class="drop"><a href="#">Pages</a>
-              <div class="megamenu dropdown">
-                <ul class="item item01">
-                  <li><a href="about.html">About Page</a></li>
-                  <li class="label2"><a href="portfolio.html">Portfolio</a>
-                    <ul>
-                      <li><a href="portfolio.html">Portfolio</a></li>
-                      <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="my-account.html">My Account</a></li>
-                  <li><a href="cart.html">Cart Page</a></li>
-                  <li><a href="checkout.html">Checkout Page</a></li>
-                  <li><a href="wishlist.html">Wishlist Page</a></li>
-                  <li><a href="error404.html">404 Page</a></li>
-                  <li><a href="faq.html">Faq Page</a></li>
-                  <li><a href="team.html">Team Page</a></li>
-                </ul>
-              </div>
-            </li>
             <li><a href="#">Услуги</a></li>
             <li><a href="{% url 'contact' %}">Контакты</a></li>
           </ul>
@@ -55,7 +35,7 @@
         <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
           <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopcart" {% endif %} style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/search.png' %}') no-repeat scroll 0 center "><a class="search__active" href="#"></a></li>
           {% if user.is_authenticated %}
-            <li class="wishlist" style="background: url('{% static 'images/icons/button-wishlist.png' %}') no-repeat scroll center"><a href="#"></a></li>
+            <li class="wishlist" style="background: url('{% static 'images/icons/button-wishlist.png' %}') no-repeat scroll center"><a href="{% url 'wishlist:wishlist' %}"></a></li>
             <li class="shopcart" style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/cart.png' %}') no-repeat scroll 0 center"><a href="{% url 'cart:cart' %}"><span class="product_qun cart-items-count">{{request.session.cart_data_obj|length}}</span></a></li>
           {% endif %}
           <li class="setting__bar__icon" style="background: transparent url('{% static 'images/icons/icon_setting.png' %}') no-repeat scroll left center"><a class="setting__active" href="#"></a>
@@ -73,7 +53,8 @@
                     <div class="switcher-currency-trigger">
                       <div class="setting__menu">
                         {% if user.is_authenticated %} 
-                          <span><a href="#">Избранное</a></span>
+                          <span><a href="{% url 'wishlist:wishlist' %}">Избранное</a></span>
+                          span><a href="{% url 'cart:cart' %}">Корзина</a></span>
                           <span><a href="{% url 'account:logout' %}">Выйти</a></span> 
                         {% else %}
                           <span><a href="{% url 'account:my_account' %}">Авторизация</a></span>
@@ -107,7 +88,7 @@
                 <li><a href="my-account.html">My Account</a></li>
                 <li><a href="cart.html">Cart Page</a></li>
                 <li><a href="checkout.html">Checkout Page</a></li>
-                <li><a href="wishlist.html">Wishlist Page</a></li>
+                <li><a href="{% url 'wishlist:wishlist' %}">Избранное</a></li>
                 <li><a href="error404.html">404 Page</a></li>
                 <li><a href="faq.html">Faq Page</a></li>
                 <li><a href="team.html">Team Page</a></li>

@@ -66,8 +66,8 @@
 											<div class="actions_inner">
 												<ul class="add_to_links">
 													<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
-													<li><a class="wishlist add-to-cart-btn" title="В корзину" data-index="{{product.id}}" id="add-to-cart-btn" href="#"><i class="bi bi-shopping-cart-full"></i></a></li>
-													<li><a class="compare" title="В избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
+													<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" id="add-to-cart-btn" href="#"><i class="bi bi-shopping-cart-full"></i></a></li>
+													<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
 													<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 												</ul>
 											</div>
@@ -162,20 +162,11 @@
 															<div class="actions_inner">
 																<ul class="add_to_links">
 																	<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
-																	<li><a class="wishlist add-to-cart-btn" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
-																	<li><a class="compare" title="В избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																	<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
+																	<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
 																	<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 																</ul>
 															</div>
-														</div>
-														<div class="product__hover--content">
-															<ul class="rating d-flex">
-																<li class="on"><i class="fa fa-star-o"></i></li>
-																<li class="on"><i class="fa fa-star-o"></i></li>
-																<li class="on"><i class="fa fa-star-o"></i></li>
-																<li><i class="fa fa-star-o"></i></li>
-																<li><i class="fa fa-star-o"></i></li>
-															</ul>
 														</div>
 													</div>
 												</div>
@@ -209,20 +200,11 @@
 														<div class="actions_inner">
 															<ul class="add_to_links">
 																<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
-																<li><a class="wishlist add-to-cart-btn" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
-																<li><a class="compare" title="В избранное" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
+																<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
 																<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 															</ul>
 														</div>
-													</div>
-													<div class="product__hover--content">
-														<ul class="rating d-flex">
-															<li class="on"><i class="fa fa-star-o"></i></li>
-															<li class="on"><i class="fa fa-star-o"></i></li>
-															<li class="on"><i class="fa fa-star-o"></i></li>
-															<li><i class="fa fa-star-o"></i></li>
-															<li><i class="fa fa-star-o"></i></li>
-														</ul>
 													</div>
 												</div>
 											</div>
@@ -264,29 +246,25 @@
 															<div class="product__content content--center content--center">
 																<h4><a href="{{product.get_absolute_url}}">{{product.title}}</a></h4>
 																<ul class="prize d-flex">
-																	<li>{{product.price}} руб.</li>
+																	<li id="product-price-{{product.id}}">{{product.price}} руб.</li><!--!!!-->
 																	{% if product.past_price is not None %}
 																		<li class="old_prize">{{product.past_price}} руб.</li>
 																	{% endif %}
 																</ul>
+																<input type="hidden" value="1" name="product-qty" id="product-qty-{{product.id}}" class="product-qty"><!--!!!-->
+																<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
+																<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
+																<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
+																<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 																<div class="action">
 																	<div class="actions_inner">
 																		<ul class="add_to_links">
-																			<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-																			<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-																			<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-																			<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
+																			<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
+																			<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
+																			<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																			<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 																		</ul>
 																	</div>
-																</div>
-																<div class="product__hover--content">
-																	<ul class="rating d-flex">
-																		<li class="on"><i class="fa fa-star-o"></i></li>
-																		<li class="on"><i class="fa fa-star-o"></i></li>
-																		<li class="on"><i class="fa fa-star-o"></i></li>
-																		<li><i class="fa fa-star-o"></i></li>
-																		<li><i class="fa fa-star-o"></i></li>
-																	</ul>
 																</div>
 															</div>
 														</div>
@@ -306,29 +284,25 @@
 														<div class="product__content content--center content--center">
 															<h4><a href="{{product.get_absolute_url}}">{{product.title}}</a></h4>
 															<ul class="prize d-flex">
-																<li>{{product.price}} руб.</li>
+																<li id="product-price-{{product.id}}">{{product.price}} руб.</li><!--!!!-->
 																{% if product.past_price is not None %}
 																	<li class="old_prize">{{product.past_price}} руб.</li>
 																{% endif %}
 															</ul>
+															<input type="hidden" value="1" name="product-qty" id="product-qty-{{product.id}}" class="product-qty"><!--!!!-->
+															<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
+															<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
+															<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
 															<div class="action">
 																<div class="actions_inner">
 																	<ul class="add_to_links">
-																		<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-																		<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-																		<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-																		<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
+																		<li><a class="cart" title="Подробней" href="{{product.get_absolute_url}}"><i class="bi bi-shopping-bag4"></i></a></li>
+																		<li><a class="wishlist add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" title="В корзину" data-index="{{product.id}}" href="#" id="add-to-cart-btn"><i class="bi bi-shopping-cart-full"></i></a></li>
+																		<li><a class="compare" title="В избранное" data-product-item="{{product.id}}" href="#"><i class="bi bi-heart-beat"></i></a></li>
+																		<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
 																	</ul>
 																</div>
-															</div>
-															<div class="product__hover--content">
-																<ul class="rating d-flex">
-																	<li class="on"><i class="fa fa-star-o"></i></li>
-																	<li class="on"><i class="fa fa-star-o"></i></li>
-																	<li class="on"><i class="fa fa-star-o"></i></li>
-																	<li><i class="fa fa-star-o"></i></li>
-																	<li><i class="fa fa-star-o"></i></li>
-																</ul>
 															</div>
 														</div>
 													</div>

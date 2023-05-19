@@ -55,16 +55,16 @@
 										  {% endif %} 
 											  max="{{product.total_quantity}}" title="Qty" type="number"><!--!!!-->
 										<div class="addtocart__actions">
-											<input type="hidden" value="{{product.get_absolute_url}}" name="product-get_absolute_url" id="product-get_absolute_url-{{product.id}}"><!--!!!-->
+											<input type="hidden" href="{{product.get_absolute_url}}" name="product-get_absolute_url" id="product-get_absolute_url-{{product.id}}"><!--!!!-->
 											<input type="hidden" value="{{product.id}}" name="product-id" id="product-id-{{product.id}}" class="product-id"><!--!!!-->
 											<input type="hidden" value="{{product.title}}" name="product-title" id="product-title-{{product.id}}"><!--!!!-->
 											<input type="hidden" value="{{product.image.url}}" name="product-image" id="product-image-{{product.id}}"><!--!!!-->
 											<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
-											<button class="tocart add-to-cart-btn" type="submit" title="Add to Cart" data-index="{{product.id}}" id="add-to-cart-btn" {% if product.total_quantity < 1 %} disable {% endif %}>
+											<button class="tocart add-to-cart-btn {% if product.total_quantity < 1 %} disabled {% endif %}" type="submit" title="Add to Cart" data-index="{{product.id}}" id="add-to-cart-btn">
 												{% if product.total_quantity < 1 %} Нет в наличии {% else %}В корзину {% endif %} </button>
 										</div>
-								<div class="product-addto-links clearfix">
-									<a class="wishlist" href="#" style="background: #ffffff url('{% static 'images/icons/product-info.png' %}') no-repeat scroll 0 0"></a>
+								<div class="product-addto-links clearfix"><li>
+									<a class="wishlist compare" title="В избранное" data-product-item="{{product.id}}" href="#" style="background: #ffffff url('{% static 'images/icons/product-info.png' %}') no-repeat scroll 0 0"></a>
 								</div>
 									</div>
 							<div class="product_meta">

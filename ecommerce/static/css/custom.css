@@ -6,3 +6,14 @@
 	Note: This is custom css. All custom styles (user styles) declare here.
 
 **********************************************************************************/
+img.product-thumbnail-wishlist{
+	width: 80px;
+	height: 100%;
+}
+
+a.disabled,
+button.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+

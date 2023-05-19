@@ -22,9 +22,9 @@
 																		<td class="product-thumbnail"><a href="#"><img src="{{item.image}}" alt="product img"></a></td>
 																		<td class="product-name"><a href="{{item.get_absolute_url}}">{{item.title}}</a></td>
 																		<td class="product-price"><span class="amount">{{item.price|floatformat:2}}</span></td>
-																		<td class="product-quantity"><input type="number" value="{{item.qty}}" min="1" id="{{item.id}}"></td>
+																		<td class="product-quantity"><input class="product-quantity_cart" type="number" value="{{item.qty}}" min="1" id="{{item.id}}"></td>
 																		<td class="product-subtotal">{% widthratio item.price 1 item.qty %}</td>
-																		<td class="product-remove"><a class="product-remove_cl" id="{{item.id}}" href="">X</a></td>
+																		<td class="product-remove"><a class="product-remove_cart" id="{{item.id}}" href="">X</a></td>
 																	</tr>
 																{% endfor %}
 														</tbody>
@@ -34,7 +34,6 @@
                 {% if totalcartitems %}
 								<div class="cartbox__btn">
 										<ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-												<li><a href="#">Update Cart</a></li>
 												<li><a href="#">Check Out</a></li>
 										</ul>
 								</div>

@@ -55,3 +55,9 @@ class ProductAdmin(admin.ModelAdmin):
       return(mark_safe(f'<img src={obj.image.url} width="150" height="150"'))
     
     get_image.short_description="Изображение"
+
+@admin.register(Wishlist)
+class WishlistAdmin(admin.ModelAdmin):
+    '''Избранное'''
+    list_display = ("product","user","date")
+    readonly_fields = ("user","product")

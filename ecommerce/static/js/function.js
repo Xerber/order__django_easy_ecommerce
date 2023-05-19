@@ -13,6 +13,7 @@ $(document).ready(function(){
       let to_url = $("#to_url").val()
       
     
+      console.log("data-index:", index);
       console.log("quantity:", quantity);
       console.log("product_title:", product_title);
       console.log("product_id:", product_id);
@@ -45,32 +46,8 @@ $(document).ready(function(){
     
     })
 
-    $('.product-remove_cl').on('click', function (e) {
-    e.preventDefault();
-    let product_id = $(this).attr("id")
-    let this_val = $(this)
 
-    console.log("product_id:", product_id);
-    console.log("current Element:", this_val);
-
-    $.ajax ({
-      url: '/cart/delete-from-cart',
-      data: {
-        'id': product_id
-      },
-      dataType: 'json',
-      beforeSend: function(){
-        this_val.hide()
-      },
-      success: function(response){
-        this_val.show()
-        $(".cart-items-count").text(response.totalcartitems)
-        $("#cart-list").html(response.data)
-        location.reload();
-      }})
-    })
-
-    $('.product-quantity_cl').on('click', function () {
+    $('.product-quantity_cart').on('click', function () {
       let quantity = $(this).val()
       let product_id = $(this).attr("id")
       let this_val = $(this)
@@ -98,4 +75,79 @@ $(document).ready(function(){
       })
     })
 
+    $('.compare'). on('click', function(e){
+        e.preventDefault();
+        let product_id = $(this).attr("data-product-item")
+        let this_val = $(this)
+
+        console.log("Product id:", product_id);
+
+        $.ajax({
+          url: "/wishlist/add-to-wishlist",
+          data: {
+            'id': product_id
+          },
+          dataType: 'json',
+          beforeSend: function(){
+            console.log('Adding to wishlist..')
+            this_val.html('✔')
+          },
+          success: function(response){
+            if (response.bool == true) {
+              console.log('Added to wishlist..')
+          }
+          }
+        })
+    })
+
+    $('a.product-remove_cart').on('click', function (e) {
+      e.preventDefault();
+      let product_id = $(this).attr("id")
+      let this_val = $(this)
+    
+      console.log("product_id:", product_id);
+      console.log("current Element:", this_val);
+    
+      $.ajax ({
+        url: '/cart/delete-from-cart',
+        data: {
+          'id': product_id
+        },
+        dataType: 'json',
+        beforeSend: function(){
+          this_val.hide()
+        },
+        success: function(response){
+          this_val.show()
+          $(".cart-items-count").text(response.totalcartitems)
+          $("#cart-list").html(response.data)
+          location.reload()
+        }})
+    })
+
+    $('.product-remove-wishlist').on('click', function (e) {
+      e.preventDefault();
+      let wishlist_id = $(this).attr("data-wishlist-product")
+      let this_val = $(this)
+
+      console.log("wishlist_id", wishlist_id)
+      console.log("current Element:", this_val)
+
+      $.ajax ({
+        url: '/wishlist/remove_from_wishlist',
+        data: {
+          'id': wishlist_id
+        },
+        dataType: 'json',
+        beforeSend: function (){
+          console.log('Deleting from wishlist')
+        },
+        success: function(response){
+          console.log('Deleted from wishlist')
+          $(".wishlist-list").html(response.data)
+          location.reload()
+        }
+      })
+      })
 })
+
