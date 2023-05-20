@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Slider, Product, Sub_Category
+from django.http import JsonResponse
+from .models import Slider, Product, Sub_Category, ContactUs
 
 
 # Create your views here.
@@ -47,6 +48,30 @@ def category_grid(request,url):
 
 def contact_view(request):
     return render(request, 'shop/contact.html')
+
+def ajax_contact(request):
+    firstname = request.GET['firstname']
+    lastname = request.GET['lastname']
+    email = request.GET['email']
+    phone = request.GET['phone']
+    subject = request.GET['subject']
+    message = request.GET['message']
+
+    request = ContactUs.objects.create(
+      first_name = firstname,
+      last_name = lastname,
+      email = email,
+      phone = phone,
+      subject = subject,
+      message = message,
+    )
+
+    data = {
+      "bool": True,
+      "message": "Сообщение успешно отправлено"
+    }
+
+    return JsonResponse({"data": data})
 
 
 def search_view(request):

@@ -112,9 +112,9 @@ class ProductShots(models.Model):
 
 class Wishlist(models.Model):
     '''Избранное'''
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, verbose_name='Клиент', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
+    date = models.DateTimeField('Дата создания', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Избранное'
@@ -123,3 +123,36 @@ class Wishlist(models.Model):
     def __str__(self):
         return self.product.title
     
+CONTACT_STATUS = (
+    ("new","Новая"),
+    ("in_progress","В работе"),
+    ("closed","Закрыта"),
+)
+
+class ContactUs(models.Model):
+    '''Обратная связь'''
+    first_name = models.CharField('Фамилия', max_length=150)
+    last_name = models.CharField('Имя', max_length=150)
+    email = models.EmailField('Email', max_length=254)
+    phone = models.CharField('Номер телефона', max_length=100)
+    subject = models.CharField('Тема письма', max_length=200)
+    message = models.TextField('Сообщение')
+    status = models.CharField('Статус', choices=CONTACT_STATUS, max_length=15, default='new')
+
+    class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
+
+    def __str__(self):
+        return self.subject
+
+
+class ContactUsComment(models.Model):
+    '''Комментарий к заявке'''
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.SET_NULL, null=True)
+    request = models.ForeignKey(ContactUs, verbose_name='Заявка', on_delete=models.CASCADE)
+    message = models.TextField('Сообщение')
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'

@@ -74,3 +74,18 @@ class WishlistAdmin(admin.ModelAdmin):
     '''Избранное'''
     list_display = ("product","user","date")
     readonly_fields = ("user","product")
+
+
+class ContactUsCommentInline(admin.TabularInline):
+    '''Комментарии к обратной связи'''
+    model = ContactUsComment
+    extra = 1
+    readonly_fields = ("user",)
+
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    '''Обратная связь'''
+    list_display = ("first_name","email","phone","subject","status")
+    list_editable = ("status",)
+    inlines = [ContactUsCommentInline,]

@@ -146,5 +146,46 @@ $(document).ready(function(){
         }
       })
     })
+
 })
 
+$(document).on("submit", "#contact-form-ajax", function(e){
+  e.preventDefault()
+  console.log('Отправляю')
+
+  let firstname = $("#firstname").val()
+  let lastname = $("#lastname").val()
+  let email = $("#email").val()
+  let phone = $("#phone").val()
+  let subject = $("#subject").val()
+  let message = $("#message").val()
+
+  console.log("firstname", firstname);
+  console.log("lastname", lastname);
+  console.log("email", email);
+  console.log("phone", phone);
+  console.log("subject", subject);
+  console.log("message", message);
+
+  $.ajax({
+    url: '/ajax-contact-form',
+    data: {
+      "firstname": firstname,
+      "lastname": lastname,
+      "email": email,
+      "phone": phone,
+      "subject": subject,
+      "message": message,
+    },
+    dataType: "json",
+    beforeSend: function(){
+      console.log("Sending req to the server..")
+    },
+    success: function(response){
+      console.log("Sent req to the server!")
+      $("#contact-form-ajax").hide()
+      $("#contact_as_p").hide()
+      $("#message-response").html("Сообщение успешно отправлено")
+    }
+  })
+})
