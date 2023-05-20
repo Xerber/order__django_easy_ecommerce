@@ -46,7 +46,6 @@ $(document).ready(function(){
     
     })
 
-
     $('.product-quantity_cart').on('click', function () {
       let quantity = $(this).val()
       let product_id = $(this).attr("id")
@@ -93,9 +92,7 @@ $(document).ready(function(){
             this_val.html('✔')
           },
           success: function(response){
-            if (response.bool == true) {
-              console.log('Added to wishlist..')
-          }
+            console.log('Added to wishlist..')
           }
         })
     })
@@ -148,6 +145,6 @@ $(document).ready(function(){
           location.reload()
         }
       })
-      })
+    })
 })
 

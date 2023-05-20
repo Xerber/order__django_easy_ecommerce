@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 	<!-- Start Bradcaump area -->
-	<div class="ht__bradcaump__area bg-image--4" style="background-image: url('{% static 'images/bg/4.jpg' %}')">
+	<div class="ht__bradcaump__area bg-image--4" style="background-image: url('{{banner.image.url}}')">
 			<div class="container">
 					<div class="row">
 							<div class="col-lg-12">
@@ -64,7 +64,7 @@
 												{% if product.total_quantity < 1 %} Нет в наличии {% else %}В корзину {% endif %} </button>
 										</div>
 								<div class="product-addto-links clearfix"><li>
-									<a class="wishlist compare" title="В избранное" data-product-item="{{product.id}}" href="#" style="background: #ffffff url('{% static 'images/icons/product-info.png' %}') no-repeat scroll 0 0"></a>
+									<a class="wishlist compare" title="В избранное" data-product-item="{{product.id}}" href="#"></a>
 								</div>
 									</div>
 							<div class="product_meta">

@@ -33,12 +33,12 @@
       </div>
       <div class="col-md-6 col-sm-6 col-6 col-lg-2">
         <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-          <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopcart" {% endif %} style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/search.png' %}') no-repeat scroll 0 center "><a class="search__active" href="#"></a></li>
+          <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopcart" {% endif %}><a class="search__active" href="#"></a></li>
           {% if user.is_authenticated %}
-            <li class="wishlist" style="background: url('{% static 'images/icons/button-wishlist.png' %}') no-repeat scroll center"><a href="{% url 'wishlist:wishlist' %}"></a></li>
-            <li class="shopcart" style="background: rgba(0, 0, 0, 0) url('{% static 'images/icons/cart.png' %}') no-repeat scroll 0 center"><a href="{% url 'cart:cart' %}"><span class="product_qun cart-items-count">{{request.session.cart_data_obj|length}}</span></a></li>
+            <li class="wishlist"><a href="{% url 'wishlist:wishlist' %}"></a></li>
+            <li class="shopcart"><a href="{% url 'cart:cart' %}"><span class="product_qun cart-items-count">{{request.session.cart_data_obj|length}}</span></a></li>
           {% endif %}
-          <li class="setting__bar__icon" style="background: transparent url('{% static 'images/icons/icon_setting.png' %}') no-repeat scroll left center"><a class="setting__active" href="#"></a>
+          <li class="setting__bar__icon"><a class="setting__active" href="#"></a>
             <div class="searchbar__content setting__block">
               <div class="content-inner">
                 <div class="switcher-currency">

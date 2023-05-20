@@ -24,6 +24,19 @@ class Slider(models.Model):
         return self.title
 
 
+class Banner(models.Model):
+    '''Баннер'''
+    title = models.CharField('Заголовок', max_length=100)
+    image = models.ImageField('Изображение', upload_to='banner', default='base/banner.jpg')
+    draft = models.BooleanField('Черновик', default=True)
+
+    class Meta:
+      verbose_name = 'Баннер'
+      verbose_name_plural = 'Баннеры'
+      
+    def __str__(self):
+        return self.title
+
 
 class Category(models.Model):
     '''Категория'''

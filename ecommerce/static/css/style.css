@@ -1794,15 +1794,17 @@ Header Styles
     align-self: stretch;
     display: flex; }
     .header__area .header__sidebar__right > li.shop_search > a {
+      background: rgba(0, 0, 0, 0) url("/static/images/icons/search.png") no-repeat scroll 0 center;
       height: 100%;
       line-height: 35px;
       width: 24px; }
     .header__area .header__sidebar__right > li.shopcart > a {
+      background: rgba(0, 0, 0, 0) url("/static/images/icons/cart.png") no-repeat scroll 0 center;
       height: 100%;
       line-height: 35px;
       width: 24px; }
 	  .header__area .header__sidebar__right > li.wishlist > a {
-      background: rgba(0, 0, 0, 0);
+      background: rgba(0, 0, 0, 0) url("/static/images/icons/button-wishlist.png") no-repeat scroll 0 center;
       height: 100%;
       line-height: 35px;
       width: 24px; }
@@ -1845,6 +1847,7 @@ Header Styles
 	  position: relative;
 	}
       .header__area .header__sidebar__right > li.setting__bar__icon > a {
+        background: transparent url("/static/images/icons/icon_setting.png") no-repeat scroll left center;
         cursor: pointer;
         font-size: 0;
         height: 35px;
@@ -1888,16 +1891,16 @@ Header Styles
 		  color: #fff;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shop_search > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("/static/images/icons/search_white.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.wishlist > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("/static/images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shopcart > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("/static/images/icons/cart_white.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.setting__bar__icon > a {
-		  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
+		  background: transparent url("/static/images/icons/icon_setting_white.png") no-repeat scroll left center;
 		}
 .mainmenu__nav .meninmenu li:first-child a {
   padding-left: 0;
@@ -1906,16 +1909,16 @@ Header Styles
   color: #fff;
 }
 .oth-page.header__area .header__sidebar__right > li.shop_search > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;
+  background: rgba(0, 0, 0, 0) url("/static/images/icons/search_white.png") no-repeat scroll 0 center;
 }
 .oth-page.header__area .header__sidebar__right > li.wishlist > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
+  background: rgba(0, 0, 0, 0) url("/static/images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
 }
 .oth-page.header__area .header__sidebar__right > li.setting__bar__icon > a {
-  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;
+  background: transparent url("/static/images/icons/icon_setting_white.png") no-repeat scroll left center;
 }
 .oth-page.header__area .header__sidebar__right > li.shopcart > a {
-  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+  background: rgba(0, 0, 0, 0) url("/static/images/icons/cart_white.png") no-repeat scroll 0 center;
 }
 .oth-page.header__absolute {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -2578,7 +2581,7 @@ nav.menu {
       background-position: 100% 0;
       transition: all 300ms ease-in 0s; }
   .product.product__style--3 .product__thumb .action .actions_inner .add_to_links li a.wishlist {
-    background: #ebebeb url("images/icons/wishlist2.png") no-repeat scroll 0 0; }
+    background: #ebebeb url("/static/images/icons/wishlist2.png") no-repeat scroll 0 0; }
     .product.product__style--3 .product__thumb .action .actions_inner .add_to_links li a.wishlist:hover {
       background-color: #ce7852;
       background-position: 100% 0;
@@ -4110,8 +4113,10 @@ h3.widget-title-modal {
   position: relative;
   text-align: center;
   width: 40px; }
+  .product__info__main .product-addto-links a.wishlist {
+    background: #ffffff url("/static/images/icons/product-info.png") no-repeat scroll 0 0; }
   .product__info__main .product-addto-links a.compare {
-    background: #ffffff url("images/icons/button-compare.png") no-repeat scroll 0 0; }
+    background: #ffffff url("/static/images/icons/wishlist.png") no-repeat scroll 0 0; }
   .product__info__main .product-addto-links a.email {
     background: #ffffff url("images/icons/button-email.png") no-repeat scroll 0 0; }
   .product__info__main .product-addto-links a:hover {
@@ -4674,7 +4679,7 @@ h3.widget-title-modal {
 }
   .gallery__menu button {
     background: #fff none repeat scroll 0 0;
-    color: color: #333;
+    color: #333;
     border: medium none;
     display: inline-block;
     font-size: 12px;
@@ -5751,7 +5756,7 @@ a.checkout__title {
       .wedget__categories.poroduct--cat ul li a:hover {
         color: #e59285; }
       .wedget__categories.poroduct--cat ul li a span {
-        color: ##333;
+        color: #333;
         float: right; }
 .wedget__categories.pro--range {
   margin: 0 0 30px; }
@@ -5979,12 +5984,14 @@ a.checkout__title {
         transition: 0.5s; }
         .list__view .content .cart__action li.cart a:hover {
           background: #e59285 none repeat scroll 0 0; }
+      .list__view .content .cart__action li.wishlist a {
+        background: white url("/static/images/icons/wishlist.png") no-repeat scroll -6% 0; }
         .list__view .content .cart__action li.wishlist a:hover {
           background-position: 108% 0;
           border: 2px solid #e59285;
           background-color: #e59285; }
       .list__view .content .cart__action li.compare a {
-        background: white url("images/icons/compare.png") no-repeat scroll -6% 0; }
+        background: white url("/static/images/icons/compare.png") no-repeat scroll -6% 0; }
         .list__view .content .cart__action li.compare a:hover {
           background-position: 108% 0;
           border: 2px solid #e59285;

@@ -1,59 +1,61 @@
 <main class="wishlist-list">
-  <div class="wishlist-area section-padding--lg bg__white">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="wishlist-content">
-                    <form action="#">
-                        <div class="wishlist-table wnro__table table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="product-remove"></th>
-                                        <th class="product-thumbnail">Изображение</th>
-                                        <th class="product-name"><span class="nobr">Название</span></th>
-                                        <th class="product-price"><span class="nobr"> Цена </span></th>
-                                        <th class="product-stock-stauts"><span class="nobr"> Наличие</span></th>
-                                        <th class="product-add-to-cart"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  {% for wish in w %}
-                                    <input type="hidden" value="1" name="product-qty" id="product-qty-{{wish.product.id}}" class="product-qty"><!--!!!-->
-                                    <input type="hidden" value="{{wish.product.id}}" name="product-id" id="product-id-{{wish.product.id}}" class="product-id"><!--!!!-->
-                                    <input type="hidden" value="{{wish.product.title}}" name="product-title" id="product-title-{{wish.product.id}}"><!--!!!-->
-                                    <input type="hidden" value="{{wish.product.image.url}}" name="product-image" id="product-image-{{wish.product.id}}"><!--!!!-->
-                                    <input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
-                                  <tr>
-                                    <td class="product-remove"><a class="product-remove-wishlist" data-wishlist-product="{{wish.id}}" href="#">×</a></td>
-                                    <td class="product-thumbnail"><a href="{{wish.product.get_absolute_url}}"><img class="product-thumbnail-wishlist" src="{{wish.product.image.url}}" alt="product-image"></a></td>
-                                    <td class="product-name"><a href="{{wish.product.get_absolute_url}}" id="product-get_absolute_url-{{wish.product.id}}">{{wish.product.title}}</a></td>
-                                    <td class="product-price"><span class="amount" id="product-price-{{wish.product.id}}">{{wish.product.price}} руб.</span></td><!--!!!-->
-                                    <td class="product-stock-status"><span class="wishlist-in-stock">
-                                      {% if wish.product.total_quantity > 0 %}
-                                          В наличии
-                                        {% else %}
-                                          Нет в наличии
-                                      {% endif %} 
-                                    </span></td>
-                                    {% if wish.product.total_quantity > 0 %}
-                                      <td class="product-add-to-cart"><a class="add-to-cart-btn" data-index="{{wish.product.id}}" id="add-to-cart-btn" href="#">Добавить в корзину</a></td>
-                                    {% else %}
-                                      <td></td>
-                                    {% endif %} 
-                                </tr>
-                                  {% empty %}
-                                    <tr>
-                                      <td>В списке Избранного пусто :(</td>
-                                    </tr>
-                                  {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>  
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+	<!-- cart-main-area start -->
+	<div class="wishlist-area section-padding--lg bg__white">
+			<div class="container">
+					<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="wishlist-content">
+											<form action="#">
+													<div class="wishlist-table wnro__table table-responsive">
+															<table>
+																	<thead>
+																			<tr>
+																					<th class="product-remove"></th>
+																					<th class="product-thumbnail">Изображение</th>
+																					<th class="product-name"><span class="nobr">Название</span></th>
+																					<th class="product-price"><span class="nobr"> Цена </span></th>
+																					<th class="product-stock-stauts"><span class="nobr"> Наличие</span></th>
+																					<th class="product-add-to-cart"></th>
+																			</tr>
+																	</thead>
+																	<tbody>
+																		{% for wish in w %}
+																			<input type="hidden" value="1" name="product-qty" id="product-qty-{{wish.product.id}}" class="product-qty"><!--!!!-->
+																			<input type="hidden" value="{{wish.product.id}}" name="product-id" id="product-id-{{wish.product.id}}" class="product-id"><!--!!!-->
+																			<input type="hidden" value="{{wish.product.title}}" name="product-title" id="product-title-{{wish.product.id}}"><!--!!!-->
+																			<input type="hidden" value="{{wish.product.image.url}}" name="product-image" id="product-image-{{wish.product.id}}"><!--!!!-->
+																			<input type="hidden" value="{% url 'cart:add-to-cart' %}" name="to_url" id="to_url"><!--!!!-->
+																		<tr>
+																			<td class="product-remove"><a class="product-remove-wishlist" data-wishlist-product="{{wish.id}}" href="">×</a></td>
+																			<td class="product-thumbnail"><a href="{{wish.product.get_absolute_url}}"><img class="product-thumbnail-wishlist" src="{{wish.product.image.url}}" alt="product-image"></a></td>
+																			<td class="product-name"><a href="{{wish.product.get_absolute_url}}" id="product-get_absolute_url-{{wish.product.id}}">{{wish.product.title}}</a></td>
+																			<td class="product-price"><span class="amount" id="product-price-{{wish.product.id}}">{{wish.product.price}} руб.</span></td><!--!!!-->
+																			<td class="product-stock-status"><span class="wishlist-in-stock">
+																				{% if wish.product.total_quantity > 0 %}
+																						В наличии
+																					{% else %}
+																						Нет в наличии
+																				{% endif %} 
+																			</span></td>
+																			{% if wish.product.total_quantity > 0 %}
+																				<td class="product-add-to-cart"><a class="add-to-cart-btn" data-index="{{wish.product.id}}" id="add-to-cart-btn" href="#">Добавить в корзину</a></td>
+																			{% else %}
+																				<td></td>
+																			{% endif %} 
+																	</tr>
+																		{% empty %}
+																			<tr>
+																				<td>В списке Избранного пусто :(</td>
+																			</tr>
+																		{% endfor %}
+																	</tbody>
+															</table>
+													</div>  
+											</form>
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+	<!-- cart-main-area end --> 
 </main>

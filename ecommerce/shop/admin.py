@@ -18,6 +18,19 @@ class SliderAdmin(admin.ModelAdmin):
     get_image.short_description="Изображение"
 
 
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    '''Баннер'''
+    list_display = ("title","draft","get_image")
+    list_editable = ("draft",)
+    readonly_fields = ("get_image",)
+
+    def get_image(self,obj):
+      return(mark_safe(f'<img src={obj.image.url} width="150" height="50"'))
+    
+    get_image.short_description="Изображение"
+
+
 class SubCategoryInline(admin.TabularInline):
     '''Подкатегории на странице категории'''
     model = Sub_Category
