@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Slider, Product, Sub_Category, ContactUs
+from .models import Slider, Product, Sub_Category, ContactUs, Subscribe
 
 
 # Create your views here.
@@ -73,6 +73,25 @@ def ajax_contact(request):
 
     return JsonResponse({"data": data})
 
+
+def ajax_subscribe(request):
+    email = request.GET['email']
+
+    if Subscribe.objects.filter(email=email).exists():
+        data = {
+          "bool": False,
+          "message": "Данный email уже подписан!"
+        }
+        return JsonResponse({"data": data})
+    else:
+      request = Subscribe.objects.create(
+        email = email,
+      )
+      data = {
+        "bool": True,
+        "message": "Email успешно подписан"
+      }
+      return JsonResponse({"data": data})
 
 def search_view(request):
     query = request.GET.get('q')

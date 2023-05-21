@@ -156,3 +156,16 @@ class ContactUsComment(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+
+
+class Subscribe(models.Model):
+    '''Email подписка'''
+    email = models.EmailField('Email', max_length=254)
+    date = models.DateTimeField('Дата подписки', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Подписчик'
+        verbose_name_plural = 'Подписчики'
+
+    def __str__(self):
+        return self.email

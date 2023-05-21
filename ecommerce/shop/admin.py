@@ -80,12 +80,19 @@ class ContactUsCommentInline(admin.TabularInline):
     '''Комментарии к обратной связи'''
     model = ContactUsComment
     extra = 1
-    readonly_fields = ("user",)
 
 
 @admin.register(ContactUs)
 class ContactUsAdmin(admin.ModelAdmin):
     '''Обратная связь'''
     list_display = ("first_name","email","phone","subject","status")
+    readonly_fields = ("first_name","last_name","email")
     list_editable = ("status",)
     inlines = [ContactUsCommentInline,]
+
+
+@admin.register(Subscribe)
+class SubscribeAdmin(admin.ModelAdmin):
+    '''Email подписчики'''
+    list_display = ("email","date")
+    readonly_fields = ("email","date")

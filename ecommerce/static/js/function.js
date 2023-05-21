@@ -189,3 +189,34 @@ $(document).on("submit", "#contact-form-ajax", function(e){
     }
   })
 })
+
+$(document).on("submit", "#subscribe-form-ajax", function(e){
+  e.preventDefault()
+  console.log('Подписываю')
+
+  let email = $("#email").val()
+  console.log("email", email);
+
+  $.ajax({
+    url: '/ajax-subscribe-form',
+    data: {
+      "email": email,
+    },
+    dataType: "json",
+    beforeSend: function(){
+      console.log("Sending email to the server..")
+    },
+    success: function(response){
+      console.log("Sent email to the server!")
+      $("#subscribe_p").hide()
+      console.log(response)
+      if (response.data.bool == true) {
+        $("#subscribe-form-ajax").hide()
+        $("#message-response").html("Данный email успешно подписан!")
+      }
+      else {
+        $("#message-response").html("Данный email уже подписан!")
+      }
+    }
+  })
+})

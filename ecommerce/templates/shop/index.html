@@ -90,13 +90,14 @@
 					<div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
 						<div class="section__title text-center">
 							<h2>Оставайтесь с нами</h2>
+							<h3 class="text-success" id="message-response"></h3>
 						</div>
 						<div class="newsletter__block text-center">
-							<p>Подпишись на еженедельную рассылку и узнавай об акциях первым!</p>
-							<form action="#">
+							<p id="subscribe_p">Подпишись на еженедельную рассылку и узнавай об акциях первым!</p>
+							<form action="#" id="subscribe-form-ajax" method="POST">
 								<div class="newsletter__box">
-									<input type="email" placeholder="Ваш e-mail" {% if user.is_authenticated %} value="{{ user.email }}" disabled {% endif %}>
-									<button type="button" class="btn btn-info">Подписаться</button>
+									<input type="email" id="email" placeholder="Ваш e-mail" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %}>
+									<button type="submit" class="btn btn-info">Подписаться</button>
 								</div>
 							</form>
 						</div>
