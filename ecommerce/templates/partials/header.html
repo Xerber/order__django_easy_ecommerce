@@ -26,7 +26,7 @@
                 {% endfor %}
               </div>
             </li>
-            <li><a href="#">Услуги</a></li>
+            <li><a href="{% url 'service:service' %}">Услуги</a></li>
             <li><a href="{% url 'contact' %}">Контакты</a></li>
           </ul>
         </nav>
@@ -54,7 +54,7 @@
                       <div class="setting__menu">
                         {% if user.is_authenticated %} 
                           <span><a href="{% url 'wishlist:wishlist' %}">Избранное</a></span>
-                          span><a href="{% url 'cart:cart' %}">Корзина</a></span>
+                          <span><a href="{% url 'cart:cart' %}">Корзина</a></span>
                           <span><a href="{% url 'account:logout' %}">Выйти</a></span> 
                         {% else %}
                           <span><a href="{% url 'account:my_account' %}">Авторизация</a></span>

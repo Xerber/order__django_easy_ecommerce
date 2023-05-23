@@ -32,8 +32,8 @@
         		<div class="row">
         			<div class="col-lg-8 col-12">
         				<div class="contact-form-wrap">
-        					<h2 class="contact__title" style="text-align:center;">Сотрудничество</h2>
-        					<p id="contact_as_p">Если у Вас есть бизнес в IT индустрии и Вы считаете что мы можем продуктивно посотрудничать - оставьте Вашу заявку! </p>
+        					<h2 class="contact__title" style="text-align:center;">Оставить заявку на связь</h2>
+        					<p id="contact_as_p">Заполните данную форму и в течении 24х часов наш менеджер свяжется с Вами </p>
 									<h3 class="text-success" id="message-response"></h3>
                             <form id="contact-form-ajax" action="#" method="POST">
 																{% csrf_token %}
@@ -46,10 +46,10 @@
                                     <input type="telephone" id="phone" name="telephone" placeholder="Ваш номер телефона*" required>
                                 </div>
                                 <div class="single-contact-form">
-                                    <input type="text" id="subject" name="subject" placeholder="Тема письма*" required>
+                                    <input type="text" id="subject" name="subject" placeholder="Тема заявки*" required>
                                 </div>
                                 <div class="single-contact-form message">
-                                    <textarea name="message" id="message" placeholder="Опишите Ваше предложение.." required></textarea>
+                                    <textarea name="message" id="message" placeholder="Текст заявки/предожения.." required></textarea>
                                 </div>
                                 <div class="contact-btn">
                                     <button type="submit">Отправить Заявку</button>

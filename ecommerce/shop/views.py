@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Slider, Product, Sub_Category, ContactUs, Subscribe
+from service.models import Service
 
 
 # Create your views here.
 def index(request):
   slider = Slider.objects.filter(draft=False).order_by('queue')
   all_products = Product.objects.all()
+  all_services = Service.objects.filter(status='published')
   context ={
     'sliders': slider,
     'all_products': all_products,
+    'all_services': all_services,
   }
+
   return render(request,'shop/index.html',context)
 
 

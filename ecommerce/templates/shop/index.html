@@ -84,7 +84,7 @@
 		</section>
 		<!-- Start BEst Seller Area -->
 		<!-- Start NEwsletter Area -->
-		<section class="wn__newsletter__area bg-image--2" style="background-image: url('{% static 'images/bg/2.jpg' %}')">
+		<section class="wn__newsletter__area bg-image--2" style="background-image: url('{% static 'images/bg/subscribe.jpg' %}')">
 			<div class="container" id='Subscribe'>
 				<div class="row">
 					<div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
@@ -327,42 +327,43 @@
 			</div>
 		</section>
 		<!-- Start Our Services Area -->
-		<!-- Our Service Area -->
-		<section class="best-seel-area pt--80 pb--60">
+		<section class="wn__product__area brown--color pt--80  pb--30">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="section__title text-center pb--50">
-							<h2 class="title__be--2">Наши <span class="color--theme">Услуги </span></h2>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+						<div class="section__title text-center">
+							<h2 class="title__be--2"><span class="color--theme">Наши услуги</span></h2>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="slider center">
-				{% for service in services %}
-					<!-- Single service start -->
-					<div class="product product__style--3">
-						<div class="product__thumb">
-							<a class="first__img" href="single-product.html"><img src="{{service.image.url}}" alt="product image"></a>
-						</div>
-						<div class="product__content content--center">
-							<div class="action">
-								<div class="actions_inner">
-									<ul class="add_to_links">
-										<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-										<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-										<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-										<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal-{{product.slug}}"><i class="bi bi-search"></i></a></li>
-									</ul>
+				<!-- Start Single Tab Content -->
+				<div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+					{% for service in all_services %}
+							<div class="product product__style--3">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+									<div class="product__thumb">
+										<a class="first__img" data-toggle="modal" id="product-get_absolute_url-{{service.id}}" href="#servicemodal-{{service.id}}"><img src="{{service.image.url}}" alt="service image"></a>
+										<a class="second__img animation1" data-toggle="modal" href="#servicemodal-{{service.id}}"><img src="{{service.image.url}}" alt="service image"></a>
+									</div>
+									<div class="product__content content--center">
+										<h4>{{service.title}}</h4>
+										<div class="action">
+											<div class="actions_inner">
+												<ul class="add_to_links">
+													<li><a data-toggle="modal" title="Быстрый просмотр" class="quickview modal-view detail-link" href="#servicemodal-{{service.id}}"><i class="bi bi-search"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<!-- Single service end -->
-				{% endfor %}
+					{% endfor %}
+					<!-- Start Single Product -->
+				</div>
+				<!-- End Single Tab Content -->
 			</div>
 		</section>
+		<!-- End Our Services Area -->
 		{% for product in all_products %}
 		<!-- QUICKVIEW PRODUCT -->
 		<div id="quickview-wrapper">
@@ -418,5 +419,39 @@
 			</div>
 	</div>
 	<!-- END QUICKVIEW PRODUCT -->
+	{% endfor %}
+	{% for service in all_services %}
+		<!-- QUICKVIEW Service -->
+		<div id="quickview-wrapper">
+			<!-- Modal -->
+			<div class="modal fade" id="servicemodal-{{service.id}}" tabindex="-1" role="dialog">
+					<div class="modal-dialog modal__container" role="document">
+							<div class="modal-content">
+									<div class="modal-header modal__header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+											<div class="modal-service">
+													<!-- Start service images -->
+													<div class="service-images">
+															<div class="main-image images">
+																	<img alt="big images" src="{{service.image.url}}">
+															</div>
+													</div>
+													<!-- end service images -->
+													<div class="service-info">
+															<h1>{{service.title}}</h1>
+															<div class="quick-desc">
+																<p>{{service.description|safe}}</p>
+															</div>
+															<div class="addtocart-btn"><a href="{% url 'contact' %}">Оставить заявку</a></div>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+	<!-- END QUICKVIEW Service -->
 	{% endfor %}
 {% endblock content %}

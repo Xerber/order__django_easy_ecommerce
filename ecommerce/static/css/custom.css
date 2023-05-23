@@ -17,3 +17,6 @@ button.disabled {
   cursor: default;
 }
 
+.service-images {
+  padding-left: 25%; 
+}

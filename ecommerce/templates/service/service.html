@@ -1,0 +1,83 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<!-- Start Bradcaump area -->
+		<div class="ht__bradcaump__area bg-image--6" style="background-image: url('{{banner.image.url}}')">
+				<div class="container">
+						<div class="row">
+								<div class="col-lg-12">
+										<div class="bradcaump__inner text-center">
+											<h2 class="bradcaump-title">Услуги</h2>
+												<nav class="bradcaump-content">
+													<a class="breadcrumb_item" href="{% url 'shop:index' %}">Домашняя</a>
+													<span class="brd-separetor">/</span>
+													<span class="breadcrumb_item active">Услуги</span>
+												</nav>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+		<!-- End Bradcaump area -->
+<!-- Start Service Area -->
+<section class="wn__portfolio__area gallery__masonry__activation bg--white mt--40 pb--100">
+	<div class="container-fluid">
+		<div class="row masonry__wrap">
+			{% for service in all_services %}
+				<!-- Start Single Portfolio -->
+				<div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12 gallery__item cat--2">
+					<div class="portfolio">
+						<div class="thumb">
+							<a data-toggle="modal" class="quickview modal-view detail-link" href="#servicemodal-{{service.id}}">
+								<img src="{% static 'images/portfolio/md-img/2.jpg' %}" alt="portfolio images">
+							</a>
+							<div class="search">
+								<a data-toggle="modal" class="quickview modal-view detail-link" href="#servicemodal-{{service.id}}"><i class="fa fa-link"></i></a>
+							</div>
+						</div>
+						<div class="content">
+							<h6><a data-toggle="modal" class="quickview modal-view detail-link" href="#servicemodal-{{service.id}}">{{service.title}}</a></h6>
+						</div>
+					</div>
+				</div>
+				<!-- End Single Portfolio -->
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<!-- End Portfolio Area -->
+{% for service in all_services %}
+<!-- QUICKVIEW Service -->
+<div id="quickview-wrapper">
+	<!-- Modal -->
+	<div class="modal fade" id="servicemodal-{{service.id}}" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal__container" role="document">
+					<div class="modal-content">
+							<div class="modal-header modal__header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+									<div class="modal-service">
+											<!-- Start service images -->
+											<div class="service-images">
+													<div class="main-image images">
+															<img alt="big images" src="{{service.image.url}}">
+													</div>
+											</div>
+											<!-- end service images -->
+											<div class="service-info">
+													<h1>{{service.title}}</h1>
+													<div class="quick-desc">
+														<p>{{service.description|safe}}</p>
+													</div>
+													<div class="addtocart-btn"><a href="{% url 'contact' %}">Оставить заявку</a></div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+</div>
+<!-- END QUICKVIEW Service -->
+{% endfor %}
+{% endblock content %}
