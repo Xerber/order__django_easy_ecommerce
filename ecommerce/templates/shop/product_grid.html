@@ -45,14 +45,14 @@
 			                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
 			                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
 			                        </div>
-			                        <p>Показано 1–{{all_products.count}} из {{all_products.count}} результатов</p>
+			                        <p>найдено {{paginator.count}} результатов</p>
 		                        </div>
         					</div>
         				</div>
         				<div class="tab__container">
 	        				<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
 	        					<div class="row">
-											{% if all_products|length == 0 %}
+											{% if page_obj|length == 0 %}
 											<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 												<div class="product__thumb">
 													<img src="{% static 'images/others/error404.png' %}" alt="product not found">
@@ -62,7 +62,7 @@
 												</div>
 											</div>
 											{% else %}
-												{% for product in all_products %}
+												{% for product in page_obj %}
 													<!-- Start Single Product -->
 													<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 														<div class="product__thumb">
@@ -104,16 +104,26 @@
 											{% endif %}
 	        					</div>
 	        					<ul class="wn__pagination">
-	        						<li class="active"><a href="#">1</a></li>
-	        						<li><a href="#">2</a></li>
-	        						<li><a href="#">3</a></li>
-	        						<li><a href="#">4</a></li>
-	        						<li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+											{% if paginator.num_pages > 1 %}
+												{% if page_obj.has_previous %}
+													<li><a href="?page={{ page_obj.previous_page_number }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+												{% endif %}
+												{% for p in paginator.page_range %}
+													{% if page_obj.number == p %}
+														<li class="active">{{ p }}</a></li>
+													{% else %}
+														<li><a href="?page={{ p }}">{{ p }}</a></li>
+												{% endif %}
+												{% endfor %}
+												{% if page_obj.has_next %}
+													<li><a href="?page={{ page_obj.next_page_number }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+												{% endif %}
+											{% endif %}
 	        					</ul>
 	        				</div>
 	        				<div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
 	        					<div class="list__view__wrapper">
-											{% if all_products|length == 0 %}
+											{% if page_obj|length == 0 %}
 											<div class="list__view">
 												<div class="thumb">
 													<img src="{% static 'images/others/error404.png' %}" alt="product not found">
@@ -123,7 +133,7 @@
 												</div>
 											</div>
 											{% else %}
-												{% for product in all_products %}
+												{% for product in page_obj %}
 													<!-- Start Single Product -->
 													<div class="list__view">
 														<div class="thumb">
@@ -153,7 +163,23 @@
 													<!-- End Single Product -->
 												{% endfor %}
 											{% endif %}
-	        					</div>
+										</div>
+										<br>
+	        					<ul class="wn__pagination">
+											{% if page_obj.has_previous %}
+												<li><a href="?page={{ page_obj.previous_page_number }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+											{% endif %}
+											{% for p in paginator.page_range %}
+												{% if page_obj.number == p %}
+													<li class="active">{{ p }}</a></li>
+												{% else %}
+													<li><a href="?page={{ p }}">{{ p }}</a></li>
+											{% endif %}
+											{% endfor %}
+											{% if page_obj.has_next %}
+												<li><a href="?page={{ page_obj.next_page_number }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+											{% endif %}
+	        					</ul>
 	        				</div>
         				</div>
         			</div>

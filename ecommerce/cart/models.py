@@ -29,7 +29,7 @@ class Order(models.Model):
       verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return self.address
+        return str(self.order_id)
 
 
 ORDERITEM_STATUS = (

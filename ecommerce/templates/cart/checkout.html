@@ -29,7 +29,7 @@
 					<h3>Платежные реквизиты</h3>
 					<form action="#" id="checkout-form" method="post">
 						{% csrf_token %}
-						<input type="text" id="cart_data" value="{{cart_data|safe}}">
+						<input type="hidden" id="cart_data" value="{{cart_data|safe}}">
 						<div class="customar__field">
 							<div class="margin_between">
 								<div class="input_box space_between">
@@ -70,10 +70,9 @@
 						<li>Товар</li>
 						<li>Стоимость</li>
 					</ul>
-					{{cart_data.items}}
 					<ul class="order_product">
 						{% for product_id, item in cart_data.items %}
-							<li>{{item.title}} × {{item.qty}}<span>{% widthratio item.price 1 item.qty %}</span></li>
+							<li>{{item.title|truncatechars:35}} × {{item.qty}}<span>{% widthratio item.price 1 item.qty %}</span></li>
 						{% endfor %}
 					</ul>
 					<ul class="total__amount">

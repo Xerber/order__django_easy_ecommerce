@@ -1,21 +1,26 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import Slider, Product, Sub_Category, ContactUs, Subscribe
 from service.models import Service
 
 
+
+
 # Create your views here.
 def index(request):
-  slider = Slider.objects.filter(draft=False).order_by('queue')
-  all_products = Product.objects.all()
-  all_services = Service.objects.filter(status='published')
-  context ={
-    'sliders': slider,
-    'all_products': all_products,
-    'all_services': all_services,
-  }
+    slider = Slider.objects.filter(draft=False).order_by('queue')
 
-  return render(request,'shop/index.html',context)
+    all_products = Product.objects.all()
+
+    all_services = Service.objects.filter(status='published')
+    context ={
+      'sliders': slider,
+      'all_products': all_products,
+      'all_services': all_services,
+    }
+
+    return render(request,'shop/index.html',context)
 
 
 def product_details(request,slug):
@@ -36,8 +41,15 @@ def page_not_found(request):
 
 def product_grid(request):
     all_products = Product.objects.all()
+    paginator = Paginator(all_products, 9)
+ 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
       'all_products': all_products,
+      'paginator': paginator,
+      'page_obj': page_obj,
     }
     return render(request, 'shop/product_grid.html',context)
 
@@ -45,8 +57,15 @@ def product_grid(request):
 def category_grid(request,url):
     sub_cat = Sub_Category.objects.get(url=url)
     all_products = Product.objects.filter(category=sub_cat)
+    paginator = Paginator(all_products, 9)
+ 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
       'all_products': all_products,
+      'paginator': paginator,
+      'page_obj': page_obj,
     }
     return render(request, 'shop/product_grid.html',context)
 

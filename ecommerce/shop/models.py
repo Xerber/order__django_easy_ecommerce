@@ -149,13 +149,16 @@ class ContactUs(models.Model):
 
 class ContactUsComment(models.Model):
     '''Комментарий к заявке'''
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.SET_NULL, null=True)
     request = models.ForeignKey(ContactUs, verbose_name='Заявка', on_delete=models.CASCADE)
     message = models.TextField('Сообщение')
+    date = models.DateTimeField('Дата создания', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.message
 
 
 class Subscribe(models.Model):
