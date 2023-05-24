@@ -14,9 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from .views import *
-from django.urls import path, include
+from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -29,6 +28,9 @@ urlpatterns = [
     path('add-to-cart/', add_to_cart, name="add-to-cart"),
     path('delete-from-cart/', delete_item_from_cart, name="delete-from-cart"),
     path('update-quantity/', update_quantity, name="update-quantity"),
+
+    path('checkout/', checkout_view, name="checkout"),
+    path('ajax-checkout-form/', ajax_checkout, name='ajax_checkout-form'),
 ]
 
 

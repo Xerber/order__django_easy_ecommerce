@@ -55,7 +55,7 @@
                 {% if totalcartitems %}
 								<div class="cartbox__btn">
 										<ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-												<li><a href="#">Check Out</a></li>
+												<li><a href="{% url 'cart:checkout' %}">Форма заказа</a></li>
 										</ul>
 								</div>
                 {% endif %}

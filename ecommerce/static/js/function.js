@@ -93,6 +93,7 @@ $(document).ready(function(){
           },
           success: function(response){
             console.log('Added to wishlist..')
+            $(".wishlist-items-count").text(response.totalwishlistitems)
           }
         })
     })
@@ -142,6 +143,7 @@ $(document).ready(function(){
         success: function(response){
           console.log('Deleted from wishlist')
           $(".wishlist-list").html(response.data)
+          $(".wishlist-items-count").text(response.totalwishlistitems)
           location.reload()
         }
       })
@@ -218,5 +220,52 @@ $(document).on("submit", "#subscribe-form-ajax", function(e){
         $("#message-response").html("Данный email уже подписан!")
       }
     }
+  })
+})
+
+$(document).on("submit", "#checkout-form", function(e){
+  e.preventDefault()
+  console.log('checkout')
+
+  let first_name = $("#first_name").val()
+  let last_name = $("#last_name").val()
+  let address = $("#address").val()
+  let add_address = $("#add_address").val()
+  let phone = $("#phone").val()
+  let email = $("#email").val()
+  let total_amount = $("#total_amount").text()
+  let cart_data = $("#cart_data").val()
+
+  console.log('first_name:', first_name)
+  console.log('last_name:', last_name)
+  console.log('address:', address)
+  console.log('add_address:', add_address)
+  console.log('phone:', phone)
+  console.log('email:', email)
+  console.log('total_amount:', total_amount)
+  console.log('cart_data:', cart_data)
+
+  $.ajax({
+    url: '/cart/ajax-checkout-form',
+    data: {
+      "first_name": first_name,
+      "last_name": last_name,
+      "address": address,
+      "add_address": add_address,
+      "phone": phone,
+      "email": email,
+      'total_amount': total_amount,
+      "cart_data": cart_data,
+    },
+    dataType: "json",
+    beforeSend: function(){
+      console.log("Sending data to the server..")
+    },
+    success: function(response){
+      console.log("Sent data to the server!")
+      $(".wn__checkout__area").hide()
+      $(".cart-items-count").text(response.totalcartitems)
+      $("#message-response").html(response.data.message)
+      }
   })
 })

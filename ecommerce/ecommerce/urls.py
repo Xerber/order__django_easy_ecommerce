@@ -27,6 +27,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('wishlist/', include('wishlist.urls')),
     path('service/', include('service.urls')),
+    
     path('contact/', views.contact_view, name='contact'),
     path('ajax-contact-form/', views.ajax_contact, name='ajax_contact-form'),
     path('ajax-subscribe-form/', views.ajax_subscribe, name='ajax-subscribe-form'),

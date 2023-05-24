@@ -53,8 +53,8 @@
                     <div class="switcher-currency-trigger">
                       <div class="setting__menu">
                         {% if user.is_authenticated %} 
-                          <span><a href="{% url 'wishlist:wishlist' %}">Избранное</a></span>
-                          <span><a href="{% url 'cart:cart' %}">Корзина</a></span>
+                          <span><a href="{% url 'wishlist:wishlist' %}">Избранное (<span class="wishlist-items-count">{{totalwishlistitems}}</span>)</a></span>
+                          <span><a href="{% url 'cart:cart' %}">Корзина (<span class="cart-items-count">{{request.session.cart_data_obj|length}}</span>)</a></span>
                           <span><a href="{% url 'account:logout' %}">Выйти</a></span> 
                         {% else %}
                           <span><a href="{% url 'account:my_account' %}">Авторизация</a></span>

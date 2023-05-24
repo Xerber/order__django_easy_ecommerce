@@ -17,7 +17,7 @@ def add_to_wishlist(request):
 
     if wishlist_count > 0:
         context = {
-          'success': True
+          'success': True,
         }
     else:
         new_wishlist = Wishlist.objects.create(
@@ -25,8 +25,11 @@ def add_to_wishlist(request):
             user = request.user
         )
         context = {
-          'success': True
+          'success': True,
         }
+
+    wish_count = Wishlist.objects.filter(user = request.user).count()
+    context['totalwishlistitems'] = wish_count
 
     return JsonResponse(context)
 
@@ -45,7 +48,8 @@ def remove_wishlist(request):
     context = {
       'success': True,
       'w': wishlist,
+      'totalwishlistitems': wishlist.count()
     }
     wishlist_json = serializers.serialize('json',wishlist)
     data = render_to_string("wishlist/async/wishlist-list.html", context)
-    return JsonResponse({'data': data, 'w': wishlist_json})
+    return JsonResponse({'data': data, 'w': wishlist_json, 'totalwishlistitems': wishlist.count()})
