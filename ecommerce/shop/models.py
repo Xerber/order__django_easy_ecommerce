@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Slider(models.Model):
     '''Слайдер'''
-    image = models.ImageField('Изображение', upload_to='slider', default='base/slider.jpg')
+    image = models.ImageField('Изображение', upload_to='slider', default='base/Slider.jpg')
     title = models.CharField('Заголовок', max_length=100)
     body = models.CharField('Текст под заголовком', max_length=100)
     link = models.CharField('Ссылка', max_length=200)
@@ -27,7 +27,7 @@ class Slider(models.Model):
 class Banner(models.Model):
     '''Баннер'''
     title = models.CharField('Заголовок', max_length=100)
-    image = models.ImageField('Изображение', upload_to='banner', default='base/banner.jpg')
+    image = models.ImageField('Изображение', upload_to='banner', default='base/Banner.jpg')
     draft = models.BooleanField('Черновик', default=True)
 
     class Meta:

@@ -26,8 +26,10 @@ def my_account(request):
 
 def register_view(request):
     form = UserRegisterForm()
+    auth_form = UserAuthForm()
     context ={
       'reg_form': form,
+      'auth_form': auth_form,
     }
     if request.method == 'POST':
         form = UserRegisterForm(request.POST or None)
@@ -43,6 +45,8 @@ def register_view(request):
             new_user = authenticate(username=username,password = password1)
             login(request, new_user)
             return redirect("shop:index")
+        else:
+          messages.warning(request, form.errors)
     return render(request, 'account/my_account.html', context)
 
 

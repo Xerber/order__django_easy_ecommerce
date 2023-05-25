@@ -33,7 +33,7 @@
       </div>
       <div class="col-md-6 col-sm-6 col-6 col-lg-2">
         <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-          <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopcart" {% endif %}><a class="search__active" href="#"></a></li>
+          <li {% if user.is_authenticated %} class="shop_search" {% else %} class="shopsearch" {% endif %}><a class="search__active" href="#"></a></li>
           {% if user.is_authenticated %}
             <li class="wishlist"><a href="{% url 'wishlist:wishlist' %}"></a></li>
             <li class="shopcart"><a href="{% url 'cart:cart' %}"><span class="product_qun cart-items-count">{{request.session.cart_data_obj|length}}</span></a></li>
@@ -75,37 +75,8 @@
       <div class="col-lg-12 d-none">
         <nav class="mobilemenu__nav">
           <ul class="meninmenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Pages</a>
-              <ul>
-                <li><a href="about.html">About Page</a></li>
-                <li><a href="portfolio.html">Portfolio</a>
-                  <ul>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                  </ul>
-                </li>
-                <li><a href="my-account.html">My Account</a></li>
-                <li><a href="cart.html">Cart Page</a></li>
-                <li><a href="checkout.html">Checkout Page</a></li>
-                <li><a href="{% url 'wishlist:wishlist' %}">Избранное</a></li>
-                <li><a href="error404.html">404 Page</a></li>
-                <li><a href="faq.html">Faq Page</a></li>
-                <li><a href="team.html">Team Page</a></li>
-              </ul>
-            </li>
-            <li><a href="shop-grid.html">Shop</a>
-              <ul>
-                <li><a href="shop-grid.html">Shop Grid</a></li>
-                <li><a href="single-product.html">Single Product</a></li>
-              </ul>
-            </li>
-            <li><a href="blog.html">Blog</a>
-              <ul>
-                <li><a href="blog.html">Blog Page</a></li>
-                <li><a href="blog-details.html">Blog Details</a></li>
-              </ul>
-            </li>
+            <li><a href="{% url 'shop:index' %}">Главная</a></li>
+            <li><a href="{% url 'shop:product_grid' %}">Магазин</a>
             <li><a href="{% url 'contact' %}">Контакты</a></li>
           </ul>
         </nav>
@@ -122,14 +93,14 @@
 <div class="brown--color box-search-content search_active block-bg close__top">
   <form id="search_mini_form" class="minisearch" action="{% url 'shop:search' %}" method='GET'>
     <div class="field__search">
-      <input type="text" placeholder="Search entire store here..." name='q'>
+      <input type="text" placeholder="Введите ваш запрос..." name='q'>
       <div class="action">
         <a href="#" onclick="document.forms['search_mini_form'].submit();"><i class="zmdi zmdi-search"></i></a>
       </div>
     </div>
   </form>
   <div class="close__wrap">
-    <span>close</span>
+    <span>закрыть</span>
   </div>
 </div>
 <!-- End Search Popup -->

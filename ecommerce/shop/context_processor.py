@@ -9,8 +9,12 @@ def default(request):
       wishlist = Wishlist.objects.filter(user=request.user)
     except:
       wishlist = 0
-    
-    totalwishlistitems = wishlist.count()
+ 
+    if wishlist != 0:
+        totalwishlistitems = wishlist.count()
+    else:
+        totalwishlistitems = wishlist
+
     
     banner = Banner.objects.filter(draft=False).first()
 

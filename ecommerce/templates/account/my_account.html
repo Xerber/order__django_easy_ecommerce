@@ -22,14 +22,16 @@
 <!-- Start My Account Area -->
 <section class="my_account_area pt--80 pb--55 bg--white">
 	<div class="container">
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-{{message.tags}}">
+					<strong>{{message}}</strong>
+				</div>
+			{% endfor %}
+		{% endif %}
 		<div class="row">
 			<div class="col-lg-6 col-12">
 				<div class="my__account__wrapper">
-					{% if auth_form.errors %}
-					<div class="alert alert-danger">
-						<strong>{{auth_form.errors}}</strong>
-					</div>
-				  {% endif %}
 					<h3 class="account__title">Авторизация</h3>
 					<form action="{% url 'account:login' %}" method='POST'>
 						{% csrf_token %}
@@ -56,11 +58,6 @@
 			</div>
 			<div class="col-lg-6 col-12">
 				<div class="my__account__wrapper">
-					{% if reg_form.errors %}
-					<div class="alert alert-danger">
-						<strong>{{reg_form.errors}}</strong>
-					</div>
-					{% endif %}
 					<h3 class="account__title">Регистрация</h3>
 					<form action="{% url 'account:register' %}" method='POST'>
 						{% csrf_token %}

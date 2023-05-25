@@ -32,3 +32,19 @@ button.disabled {
   padding: 0 25px;
   text-transform: uppercase;
 }
+
+.header__area .header__sidebar__right > li.shopsearch > a {
+  background: rgba(0, 0, 0, 0) url("/static/images/icons/search.png") no-repeat scroll 0 center;
+  height: 100%;
+  line-height: 35px;
+  width: 24px; }
+
+  .is-sticky.header__area .header__sidebar__right > li.shopsearch > a {
+    background: rgba(0, 0, 0, 0) url("/static/images/icons/search_white.png") no-repeat scroll 0 center;
+  }
+
+.header__area .header__sidebar__right > li.shopsearch {
+  padding-left: 0px;
+  padding-right: 26px;
+  position: relative;
+ }

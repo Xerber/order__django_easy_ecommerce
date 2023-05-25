@@ -165,21 +165,23 @@
 											{% endif %}
 										</div>
 										<br>
-	        					<ul class="wn__pagination">
-											{% if page_obj.has_previous %}
-												<li><a href="?page={{ page_obj.previous_page_number }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
-											{% endif %}
-											{% for p in paginator.page_range %}
-												{% if page_obj.number == p %}
-													<li class="active">{{ p }}</a></li>
-												{% else %}
-													<li><a href="?page={{ p }}">{{ p }}</a></li>
-											{% endif %}
-											{% endfor %}
-											{% if page_obj.has_next %}
-												<li><a href="?page={{ page_obj.next_page_number }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
-											{% endif %}
-	        					</ul>
+										{% if paginator.num_pages > 1 %}
+											<ul class="wn__pagination">
+												{% if page_obj.has_previous %}
+													<li><a href="?page={{ page_obj.previous_page_number }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+												{% endif %}
+												{% for p in paginator.page_range %}
+													{% if page_obj.number == p %}
+														<li class="active">{{ p }}</a></li>
+													{% else %}
+														<li><a href="?page={{ p }}">{{ p }}</a></li>
+												{% endif %}
+												{% endfor %}
+												{% if page_obj.has_next %}
+													<li><a href="?page={{ page_obj.next_page_number }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+												{% endif %}
+											</ul>
+										{% endif %}
 	        				</div>
         				</div>
         			</div>
