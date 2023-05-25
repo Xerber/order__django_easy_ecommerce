@@ -151,6 +151,11 @@ $(document).ready(function(){
 
 })
 
+$('body').on('input', '.input-words', function(){
+	this.value = this.value.replace(/[^a-zа-яё\s]/gi, '');
+});
+
+
 $(document).on("submit", "#contact-form-ajax", function(e){
   e.preventDefault()
   console.log('Отправляю')
