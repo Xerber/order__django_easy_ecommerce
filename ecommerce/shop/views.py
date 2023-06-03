@@ -119,8 +119,16 @@ def ajax_subscribe(request):
 def search_view(request):
     query = request.GET.get('q')
     all_products = Product.objects.filter(title__icontains=query).order_by("-price") 
+
+    paginator = Paginator(all_products, 9)
+ 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
     context = {
       'query': query,
-      'all_products': all_products
+      'all_products': all_products,
+      'page_obj': page_obj
     }
     return render(request, 'shop/product_grid.html',context)
