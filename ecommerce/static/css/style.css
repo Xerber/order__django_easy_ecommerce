@@ -2527,6 +2527,7 @@ nav.menu {
   opacity: 1;
   transition: all 0.4s ease 0s;
   visibility: visible;
+  height: 50px;
 }
       .product .product__content h4 a {
         display: block;

@@ -48,3 +48,7 @@ button.disabled {
   padding-right: 26px;
   position: relative;
  }
+
+.height {
+  height: 300px;
+}
