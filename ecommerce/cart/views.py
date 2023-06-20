@@ -11,12 +11,12 @@ def add_to_cart(request):
     cart_product = {}
 
     cart_product[str(request.GET['id'])] = {
-      'id': request.GET['id'],
-      'title': request.GET['title'],
-      'qty': request.GET['qty'],
-      'price': request.GET['price'].split(' ')[0],
-      'image': request.GET['image'],
-      'get_absolute_url': request.GET['get_absolute_url'],
+      'id': request.GET.get('id'),
+      'title': request.GET.get('title'),
+      'qty': request.GET.get('qty'),
+      'price': request.GET.get('price').split(' ')[0],
+      'image': request.GET.get('image'),
+      'get_absolute_url': request.GET.get('get_absolute_url'),
     }
 
     if 'cart_data_obj' in request.session:
@@ -98,6 +98,8 @@ def checkout_view(request):
     if 'cart_data_obj' in request.session:
         for product_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
+    else:
+        request.session['cart_data_obj'] = ''
     return render(request, 'cart/checkout.html', {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
 
 
@@ -132,9 +134,11 @@ def ajax_checkout(request):
     
     try:
     
-        new_order = Order.objects.filter(phone='+79591580625').last()
+        new_order = Order.objects.filter(phone=phone).last()
 
         for product_id, item in json.loads(cart_data.replace("\'","\"")).items():
+            if not Product.objects.filter(id = product_id).exists():
+                raise Exception('Product DoesNotExist')
             qty = item['qty']
             order_item = OrderItem(
                 order_id = Order.objects.get(id=new_order.id),
@@ -152,6 +156,7 @@ def ajax_checkout(request):
                         del request.session['cart_data_obj'][product_id]
                         request.session['cart_data_obj'] = cart_data
             else:
+                order.delete()
                 data = {
                         "bool": False,
                         "reason": 'qty',
@@ -162,10 +167,10 @@ def ajax_checkout(request):
             order_item.save()
 
     except Exception as e:
-        print(e)
         order.delete()
         data = {
                 "bool": False,
+                "reason": str(e),
                 "message": f"Ошибка при создании заказа. Обратитесь к Администратору"
                 }
         return JsonResponse({"data": data, 'totalcartitems': len(request.session['cart_data_obj'])})
@@ -175,4 +180,4 @@ def ajax_checkout(request):
     "message": f"Заказ успешно создан. Номер заказа: {new_order.id}"
     }
 
-    return JsonResponse({"data": data, 'totalcartitems': len(request.session['cart_data_obj'])})
+    return JsonResponse({"data": data, 'totalcartitems': 0})
